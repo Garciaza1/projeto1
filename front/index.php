@@ -29,9 +29,9 @@
                 <H1>PROJETO</H1>
             </div>
             <div class="menu-header">
-                <a href="#">Cadastrar</a>
-                <a href="#">Login</a>
-                <a href="#">Outra Pagina</a>
+                <a href="pages/cadastro.php">Cadastrar</a>
+                <a href="pages/login.php">Login</a>
+                <a href="pages/pagina2.html">Outra Pagina</a>
             </div>
         </header>
     </header>
