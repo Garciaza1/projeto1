@@ -1,3 +1,9 @@
+<?php
+function valida_dados(){
+    // escrever a validação de formulario
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -33,7 +39,7 @@
 
                         <hr>
 
-                        <form action="#" method="post">
+                        <form action="../../back/controller/controller.php" method="post">
 
                             <div class="mb-3">
                                 <label for="text_name" class="form-label">Nome</label>
@@ -68,13 +74,8 @@
                                     <input type="text" class="form-control" name="text_phone" id="text_phone" required>
                                 </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label for="text_interests" class="form-label">Interesses<span class="ms-4"><small>(Palavras separadas por virgulas)</small></span></label>
-                                <input type="text" class="form-control" name="text_interests" id="text_interests">
-                            </div>
                             
-                            <div class="mb-3 text-center">
+                            <div class="mb-3 text-center mt-5">
                                 <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
                                 <button type="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
                             </div>

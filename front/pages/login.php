@@ -26,13 +26,12 @@
             <div class="card p-4">
 
                 <div class="d-flex align-items-center justify-content-center my-4">
-                    <!-- colocar a imagem -->
-                    <img src="XXXXXX" class="img-fluid me-3">
+                    <img src="../assets/imagens/logo1.png" class="img-fluid me-3">
                 </div>
 
                 <div class="row justify-content-center">
                     <div class="col-8">
-                        <form action="?ct=main&mt=login_submit" method="post" novalidate>
+                        <form action="../../back/controller/controller.php" method="post" novalidate>
                             <div class="mb-3">
                                 <label for="text_username" class="form-label">Utilizador</label>
                                 <input type="email" name="text_username" id="text_username" value="" class="form-control" required>

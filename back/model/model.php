@@ -1,6 +1,5 @@
 <?php
 
-namespace projeto1\Model;
 
 use projeto1\System\Database;
 
