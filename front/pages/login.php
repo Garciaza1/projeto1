@@ -1,3 +1,8 @@
+<?php
+include('../../back/controller/controller.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,7 +34,7 @@
 
                             <h4><strong>login</strong></h4>
                             <hr>
-                            <form action="#" method="post">
+                            <form action="../../back/model/loginT.php" method="post">
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Email:</label>
@@ -38,12 +43,12 @@
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Senha:</label>
-                                    <input type="password" name="text_senha" id="text_senha" value="" class="form-control" required>
+                                    <input type="password" name="text_senha" id="text_senha" value="" class="form-control" >
                                 </div>
 
                                 <div class="mb-3 text-center">
-                                    <a href="#" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
-                                    <button type="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
+                                    <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
+                                    <button type="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Entrar</button>
                                 </div>
 
                                 <?php if (isset($validation_errors)) : ?>

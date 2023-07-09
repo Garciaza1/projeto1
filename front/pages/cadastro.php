@@ -1,3 +1,11 @@
+<?php
+include('../../back/controller/controller.php');
+
+use fgb\Controllers;
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,7 +27,7 @@
 
 
     <!-- posteriormente colocar icones na guia do site-->
-    <title>Site 1 (mostruario do projeto)</title>
+    <title>Cadastro</title>
 </head>
 
 <body data-bs-theme="dark">
@@ -35,7 +43,7 @@
 
                             <hr>
 
-                            <form action="#" method="post">
+                            <form action="../../back/controller/controller.php" method="post">
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Nome</label>
@@ -66,6 +74,10 @@
                                         <input type="email" class="form-control" name="text_email" id="text_email" required>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
+                                        <label for="text_email" class="form-label">Senha</label>
+                                        <input type="Senha" class="form-control" name="text_senha" id="text_senha" required>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="text_phone" class="form-label">Telefone</label>
                                         <input type="text" class="form-control" name="text_phone" id="text_phone" required>
                                     </div>
@@ -73,8 +85,8 @@
 
                                 <div class="mb-3 text-center">
                                     <a href="#" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Limpar</a>
-                                    <a href="#" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
-                                    <button type="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
+                                    <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
+                                    <button type="submit" name="submit" id="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
                                 </div>
 
                                 <?php if (isset($validation_errors)) : ?>
