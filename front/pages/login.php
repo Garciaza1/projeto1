@@ -1,9 +1,10 @@
 <?php
-session_start();
+
 include_once("../../back/config.php");
+include_once("../../back/model/loginT.php");
+
 if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
 {
-    print_r($_SESSION);
     
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
@@ -47,7 +48,7 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
 
                             <h4><strong>login</strong></h4>
                             <hr>
-                            <form action="../../back/model/loginT.php" method="post">
+                            <form action="<?=login()?>" method="post">
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Email:</label>
@@ -63,7 +64,8 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
                                     <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
                                     <button type="submit" name="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Entrar</button>
                                     <br>
-                                    <a href="cadastro.php" class="btn btn-secondary mt-3"><i class="fa-solid fa-xmark me-2"></i>Cadastrar</a>
+                                    <h6 class="mt-3">ainda não se cadastrou?</h6>
+                                    <a href="cadastro.php" class="btn btn-secondary mt-1"><i class="fa-solid fa-xmark me-2"></i>Cadastrar-se</a>
                                 </div>
 
                                 <?php if (isset($validation_errors)) : ?>
