@@ -1,31 +1,43 @@
 <?php
-
-namespace fgb\Login;
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Verificar o submit do login
-
-echo('deu boa');
-// Chamar o método pegaLogin()
-if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
-    
+session_start();
+if (isset($_POST['submit']) && !empty($_POST['text_email']) && !empty($_POST['text_senha'])) {
     // Acesso do sistema.
-    $conexao = $this->mysqli->conecta();
+    include_once('../config.php');
     $email = $_POST['text_email'];
     $senha = $_POST['text_senha'];
-
-    print_r($email, $senha);
+    $dados = [$email, $senha];
 
     $sql = "SELECT * FROM usuario WHERE email = '$email' and senha = '$senha'";
+    // faz a consulta
     $result = $conexao->query($sql);
-    print_r($sql);
-    print_r($result);
+    // pega o id
+    $id = $conexao->query("SELECT id FROM usuario WHERE email = '$email'");
+    if(mysqli_num_rows($id) > 0)
+    {
+        $user = mysqli_fetch_assoc($id);
+
+    }
+    // se tiver mais de uma linha afetada ele entra. senao faz dnv
+    if (mysqli_num_rows($result) < 1) {
+        header('location: ../../front/pages/login.php');
+        echo 'não foi encontrado perfil com esse nome ou senha';
+
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        unset($_SESSION['user']);
+    } else {
+
+        //incia sessão e envia ate a pagina com a sessão ativa 
+        
+        $_SESSION['email'] = $email;
+        $_SESSION['senha'] = $senha;
+        $_SESSION['user'] = $user['id'];
+
+
+        echo '<pre>';
+        print_r($_SESSION);
+        header('location: ../../front/pages/pagina2.php');
+    }
 } else {
     header('location: ../../front/pages/login.php');
 }
-// ver o controller e refazer o codigo ate o loguin entrar
-// ver o controller e refazer o codigo ate o loguin entrar
-// ver o controller e refazer o codigo ate o loguin entrar
-// ver o controller e refazer o codigo ate o loguin entrar
-// ver o controller e refazer o codigo ate o loguin entrar
-// ver o controller e refazer o codigo ate o loguin entrar

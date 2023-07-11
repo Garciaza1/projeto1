@@ -1,8 +1,7 @@
 <?php
-include('../../back/controller/controller.php');
 
-use fgb\Controllers;
-
+session_start();
+include_once("../../back/config.php");
 
 ?>
 
@@ -43,7 +42,7 @@ use fgb\Controllers;
 
                             <hr>
 
-                            <form action="../../back/controller/controller.php" method="post">
+                            <form action="../../back/model/cadastroT.php" method="post">
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Nome</label>
@@ -84,7 +83,7 @@ use fgb\Controllers;
                                 </div>
 
                                 <div class="mb-3 text-center">
-                                    <a href="#" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Limpar</a>
+                                    <a href="#" onclick="limparFrom()" class="btn btn-secondary" id="LimparBtn"><i class="fa-solid fa-xmark me-2"></i>Limpar</a>
                                     <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
                                     <button type="submit" name="submit" id="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
                                 </div>

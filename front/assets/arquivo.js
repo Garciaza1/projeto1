@@ -16,5 +16,16 @@ function abrirTexto() {
     });
     // inserir o btn3
 }
+function limparform(){
+    document.getElementById('LimparBtn').addEventListener('click', () => {
+
+        document.getElementById("text_name").focus();
+        document.getElementById("text_birthdate").focus();
+        document.getElementById("text_email").focus();
+        document.getElementById("text_senha").focus();
+        document.getElementById("text_phone").focus();
+
+    });
+}
 
 abrirTexto();

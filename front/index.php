@@ -1,6 +1,22 @@
 <?php
+session_start();
+include_once("../back/config.php");
+if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)) {
+    print_r($_SESSION);
 
+    if(isset($_SESSION)){
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        unset($_SESSION['user']);
+    }
+        
+    header('Location: pages/login.php');
+} else {
 
+    $logado = $_SESSION['email'];
+
+    print_r('logado :)');
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,11 +26,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- link bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <!-- links dos arquivos assets -->
     <link rel="stylesheet" href="assets/arquivo.css">
@@ -26,19 +39,29 @@
 
 <body data-bs-theme="dark">
 
-    <header class="">
-        <header >
-            <div class="logo d-flex">
-                <img height="60px" src="assets/imagens/logo1.png" alt="logo">
-                <H1>PROJETO</H1>
-            </div>
-            <div class="menu-header">
-                <a href="pages/cadastro.php">Cadastrar</a>
-                <a href="pages/login.php">Login</a>
-                <a href="pages/pagina2.html">Outra Pagina</a>
-            </div>
-        </header>
+
+    <header>
+        <div class="logo d-flex">
+            <img height="60px" src="assets/imagens/logo1.png" alt="logo">
+            <H1>PROJETO</H1>
+        </div>
+        <div class="">
+            <?php
+            echo "<h3>Bem vindo: <u>$logado</u></h3>";
+            ?>
+        </div>
+        <div class="menu-header justfy-content-between text-center">
+            <a class="btn btn-info " href="pages/cadastro.php">Cadastrar</a>
+            <a class="btn btn-info " href="pages/login.php">Login</a>
+            <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
+        </div>
+        <div class="d-flex">
+            <a href="../back/model/sair.php" class="btn btn-danger me-5 ">
+                Sair
+            </a>
+        </div>
     </header>
+
     <script>
         //alert("MUITO IMPORTANTE LER O README.MD  la terão instruções sobre o xampp e como usar.");
     </script>
@@ -56,8 +79,7 @@
                         </button>
                         <label>2 </label>
                         <button class="border spinner-border " id="btn2">
-                            <img width="30px"
-                                src="https://www.otempo.com.br/image/contentid/policy:1.2873697:1685219245/MC-Pipokinha-jpg.jpg?f=3x2&w=1224" alt="">
+                            <img width="30px" src="https://www.otempo.com.br/image/contentid/policy:1.2873697:1685219245/MC-Pipokinha-jpg.jpg?f=3x2&w=1224" alt="">
                         </button>
                         <label>3 </label>
                         <button class="border spinner-border " id="btn3">
@@ -65,6 +87,7 @@
                         </button>
                     </div>
                 </nav>
+            </div>
         </aside>
 
         <!-- colocar os sections em d-none para p/ JS tirar o d-none -->
@@ -123,8 +146,7 @@
                 Já pediu desculpas por ser homem? <br> E agr oq eu faço?😥
             </h3>
             <figure class="col-12">
-                <img height="200px"
-                    src="https://www.otempo.com.br/image/contentid/policy:1.2873697:1685219245/MC-Pipokinha-jpg.jpg?f=3x2&w=1224">
+                <img height="200px" src="https://www.otempo.com.br/image/contentid/policy:1.2873697:1685219245/MC-Pipokinha-jpg.jpg?f=3x2&w=1224">
                 <figcaption class="text-light"> 10 de dezembro de 1815 / 27 de novembro de 1852 </figcaption>
             </figure>
 
@@ -162,7 +184,8 @@
     </main>
 
     <footer class="footer p-3 text-center">
-         &copy; Todos os direitos reservados. | &reg;since 2023
+        &copy; Todos os direitos reservados. | &reg;since 2023
     </footer>
 </body>
+
 </html>

@@ -1,6 +1,19 @@
 <?php
-include('../../back/controller/controller.php');
+session_start();
+include_once("../../back/config.php");
+if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
+{
+    print_r($_SESSION);
+    
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    unset($_SESSION['user']);
 
+} else {
+    
+    $logado = $_SESSION['email'];
+    print_r('logado :)');
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +32,7 @@ include('../../back/controller/controller.php');
     <script defer src="assets/arquivo.js"></script>
 
     <!-- posteriormente colocar icones na guia do site-->
-    <title>Site 1 (mostruario do projeto)</title>
+    <title>Login</title>
 </head>
 
 <body data-bs-theme="dark">
@@ -48,7 +61,9 @@ include('../../back/controller/controller.php');
 
                                 <div class="mb-3 text-center">
                                     <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
-                                    <button type="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Entrar</button>
+                                    <button type="submit" name="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Entrar</button>
+                                    <br>
+                                    <a href="cadastro.php" class="btn btn-secondary mt-3"><i class="fa-solid fa-xmark me-2"></i>Cadastrar</a>
                                 </div>
 
                                 <?php if (isset($validation_errors)) : ?>
