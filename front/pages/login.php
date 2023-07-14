@@ -8,12 +8,11 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
     
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
-    unset($_SESSION['user']);
 
 } else {
     
     $logado = $_SESSION['email'];
-    print_r('logado :)');
+    print_r( $logado . ' :)');
 }
 ?>
 
@@ -48,7 +47,7 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
 
                             <h4><strong>login</strong></h4>
                             <hr>
-                            <form action="<?=login()?>" method="post">
+                            <form action="../../back/model/loginT.php" method="post">
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Email:</label>
@@ -61,14 +60,19 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
                                 </div>
 
                                 <div class="mb-3 text-center">
+
                                     <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
+
                                     <button type="submit" name="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Entrar</button>
+                                    
                                     <br>
+
                                     <h6 class="mt-3">ainda não se cadastrou?</h6>
                                     <a href="cadastro.php" class="btn btn-secondary mt-1"><i class="fa-solid fa-xmark me-2"></i>Cadastrar-se</a>
+
                                 </div>
 
-                                <?php if (isset($validation_errors)) : ?>
+                                <?php if (!empty($validation_errors)) : ?>
                                     <div class="alert alert-danger p-2">
                                         <ul>
                                             <?php foreach ($validation_errors as $error) : ?>

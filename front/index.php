@@ -1,21 +1,23 @@
 <?php
-session_start();
-include_once("../back/config.php");
-if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)) {
-    print_r($_SESSION);
 
-    if(isset($_SESSION)){
+include_once("../back/config.php");
+include_once("../back/model/loginT.php");
+
+
+if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)) {
+    //print_r($_SESSION);
+
+    if (isset($_SESSION)) {
+
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
-        unset($_SESSION['user']);
     }
-        
-    header('Location: pages/login.php');
+
+    //header('Location: pages/login.php');
 } else {
 
     $logado = $_SESSION['email'];
 
-    print_r('logado :)');
 }
 ?>
 <!DOCTYPE html>
@@ -45,20 +47,27 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             <img height="60px" src="assets/imagens/logo1.png" alt="logo">
             <H1>PROJETO</H1>
         </div>
-        <div class="">
-            <?php
-            echo "<h3>Bem vindo: <u>$logado</u></h3>";
-            ?>
-        </div>
+
+        <?php if (isset($logado)) : ?>
+            <div class="">
+                <?= $logado . ' está logado :)' ?>
+            </div>
+        <?php endif; ?>
         <div class="menu-header justfy-content-between text-center">
-            <a class="btn btn-info " href="pages/cadastro.php">Cadastrar</a>
-            <a class="btn btn-info " href="pages/login.php">Login</a>
+        <?php if (!isset($logado)) : ?>
+            <div>
+                <a class="btn btn-info " href="pages/cadastro.php">Cadastrar</a>
+                <a class="btn btn-info " href="pages/login.php">Login</a>
+            </div>
+        <?php endif; ?>    
             <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
         </div>
         <div class="d-flex">
-            <a href="../back/model/sair.php" class="btn btn-danger me-5 ">
-                Sair
-            </a>
+            <?php if (isset($_SESSION['email']) == true) : ?>
+                <a href="../back/model/sair.php" class="btn btn-danger me-5 ">
+                    Sair
+                </a>
+            <?php endif; ?>
         </div>
     </header>
 

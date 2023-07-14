@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 include_once("../../back/config.php");
 
 ?>

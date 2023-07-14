@@ -1,13 +1,10 @@
 <?php
-session_start();
 
 include_once("../../back/config.php");
-print_r($_SESSION);
 
 if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
-    unset($_SESSION['user']);
     header('Location: login.php');
 }
 
@@ -18,9 +15,7 @@ $sql = "SELECT * FROM usuario ORDER BY id DESC";
 $result = $conexao->query($sql);
 
 print_r($result);
-
-
-
+print_r( $logado . ' :)');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
