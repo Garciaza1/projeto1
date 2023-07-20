@@ -51,12 +51,12 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Email:</label>
-                                    <input type="email" name="text_email" id="text_email" value="" class="form-control" required>
+                                    <input type="email" name="text_email" id="text_email" value="" class="form-control">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Senha:</label>
-                                    <input type="password" name="text_senha" id="text_senha" value="" class="form-control" >
+                                    <input type="password" name="text_senha" id="text_senha" value="" class="form-control">
                                 </div>
 
                                 <div class="mb-3 text-center">
