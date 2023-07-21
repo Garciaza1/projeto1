@@ -8,6 +8,8 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
     
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
+    unset($_SESSION['user_name']);
+    unset($_SESSION['user_id']);
 
 } else {
     

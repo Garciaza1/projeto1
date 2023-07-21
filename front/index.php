@@ -11,14 +11,29 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_id']);
     }
 
     //header('Location: pages/login.php');
 } else {
-
+    
     $logado = $_SESSION['email'];
+    $user = $_SESSION['user_name'];
+    $user_id = $_SESSION['user_id'];
+     $perfil =[
+        $user_id => " Id: " . $user_id,
+        $user => "Nome: " . $user,
+        $logado => "Email: " . $logado,
+];
+    // essas informações tem que ser guardadas no menu de perfil.
+    foreach( $perfil as $dados){
+        print_r(" | " . $dados);
 
+    } 
+    
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -41,25 +56,25 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
 <body data-bs-theme="dark">
 
-
-    <header>
+<!---------- inicio do header -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <header class="">
         <div class="logo d-flex">
             <img height="60px" src="assets/imagens/logo1.png" alt="logo">
             <H1>PROJETO</H1>
         </div>
-
+        
         <?php if (isset($logado)) : ?>
             <div class="">
                 <?= $logado . ' está logado :)' ?>
             </div>
         <?php endif; ?>
         <div class="menu-header justfy-content-between text-center">
-        <?php if (!isset($logado)) : ?>
-            <div>
-                <a class="btn btn-info " href="pages/cadastro.php">Cadastrar</a>
-                <a class="btn btn-info " href="pages/login.php">Login</a>
-            </div>
-        <?php endif; ?>    
+            <?php if (!isset($logado)) : ?>
+                <div>
+                    <a class="btn btn-info " href="pages/cadastro.php">Cadastrar</a>
+                    <a class="btn btn-info " href="pages/login.php">Login</a>
+                </div>
+            <?php endif; ?>
             <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
         </div>
         <div class="d-flex">
@@ -69,6 +84,37 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 </a>
             <?php endif; ?>
         </div>
+
+        <?php if (isset($logado)) : ?>
+            <div class="container">
+                <div class="">
+                    <button type="button" class="btn btn-light row" id="menu-icon">
+                        <div class="rounded-circle">
+                            <img height="30px" src="assets/imagens/peril-2.png" alt="perfil">
+                            <?= $logado . ':)' ?>
+                        </div>
+                        
+                    </button>
+                    
+                    <?php foreach($perfil as $dados) : ?>
+                    <div class="d-none row border border-sucsses" id="menu" style="background-color: black">
+                            <ul>
+                                <li>
+                                    <?php print_r($dados. "<hr>")  ?>
+                                </li>
+                            </ul>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+        <?php endif; ?>
+
+
+            <script>
+                document.getElementById('menu-icon').addEventListener('click', () => {
+                    document.getElementById('menu').classList.toggle("d-none")
+                })
+            </script>
     </header>
 
     <script>

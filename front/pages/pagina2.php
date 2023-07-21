@@ -13,23 +13,27 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_id']);
+    
     }
 
     //header('Location: pages/login.php');
 } else {
-
+    
     $logado = $_SESSION['email'];
-    
-    //print_r( $logado . ' :)');
-    
-    ////////////////////////////////////////////
+    $user = $_SESSION['user_name'];
+    $user_id = $_SESSION['user_id'];
+     $perfil =[
+        $user_id => " id: " . $user_id,
+        $user => "nome: " . $user,
+        $logado => "email: " . $logado,
+];
+    // essas informações tem que ser guardadas no menu de perfil.
+    foreach( $perfil as $dados){
+        print_r(" | " . $dados);
 
-    //$sql = "SELECT nome FROM usuario WHERE email = '$_SESSION['email']' ";
-    
-    //$result = $conexao->query($sql);
-    
-
-    echo $_SESSION['user_name'];
+    } 
     
 }
 
@@ -64,6 +68,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
         <?php if (isset($logado)) : ?>
             <div class="">
+
                 <?= $logado . ' está logado :)' ?>
             </div>
         <?php endif; ?>
@@ -75,11 +80,11 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 <a class="btn btn-info " href="login.php">Login</a>
             </div>
         <?php endif; ?>    
-            <a class="btn btn-info " href="../index.php">HOME</a>
+            <a class="btn btn-info bold" href="../index.php">Home</a>
         </div>
         <div class="d-flex">
             <?php if (isset($_SESSION['email']) == true) : ?>
-                <a href="../../back/model/sair.php" class="btn btn-danger me-5 ">
+                <a href="../../back/model/sair.php" class="btn btn-danger me-5 bold">
                     Sair
                 </a>
             <?php endif; ?>
