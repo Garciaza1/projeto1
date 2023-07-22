@@ -1,0 +1,17 @@
+        <?php if (mysqli_num_rows($result['select_todos_comentarios']) > 0) : ?>
+            <section class="comentario mt-5 d-grid justify-content-center">
+                <div class="jumbotron jumbotron-fluid bg-info text-white row">
+                    <div class="container align-items-start col-12">
+                        <?php foreach ($result['select_todos_comentarios'] as $comentarios) : ?>
+                            <?php $autor = $comentarios['nome'];
+                            $comentario = $comentarios['comentario']; ?>
+                            <h5 class="display-9 pt-2"><?= $autor . "<hr>" ?></h5>
+                            <p class="lead p-3"><?= $comentario . "<hr>" ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
+
+
+        

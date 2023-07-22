@@ -2,6 +2,7 @@
 
 include_once("../../back/config.php");
 
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -23,11 +24,21 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     $logado = $_SESSION['email'];
     $user = $_SESSION['user_name'];
     $user_id = $_SESSION['user_id'];
+    /*
+    $partesDoNome = explode(" ", $user);
+    $primeiro_nome = $partesDoNome[0];
+    */
     $perfil = [
         $user_id => " id: " . $user_id,
         $user => "nome: " . $user,
         $logado => "email: " . $logado,
     ];
+    // Use a função explode para dividir o nome em partes com base no espaço em branco
+
+
+    // Pegue o primeiro elemento do array, que é o primeiro nome
+
+    include_once("../../back/controller/comentario.php");
 }
 
 ?>
@@ -94,31 +105,50 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
         <?php endif; ?>
     </header>
     <hr>
+    <!-- inicio do main  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <main>
+        <div class="col-md-8 offset-md-2">
+            <h2>Seção de Comentários</h2>
+        </div>
+        <?php if (mysqli_num_rows($result['select_todos_comentarios']) > 0) : // tem que funcionar sem o login.
+        ?>
+            <section class="comentario mt-5 d-grid justify-content-center" style="margin-left: 0%;">
+                <div class="jumbotron jumbotron-fluid bg-secondary text-white border border- rounded row">
+                    <div class="container align-items-start col-12">
+                        <?php while ($comentarios = mysqli_fetch_assoc($result['select_todos_comentarios'])) : ?>
+                            <?php $autor = $comentarios['nome'];
+                            $comentario = $comentarios['comentario']; ?>
+                            <h5 class="display-9 pt-2"><?= $autor ?></h5>
+                            <p class="lead p-1"><?= $comentario . "<hr>" ?></p>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
 
-
-        <section class="comentario mt-5 d-flex justify-content-center">
-            <div class="jumbotron jumbotron-fluid bg-info text-white">
-                <div class="container align-items-start">
-                    <p class="display-4">Comentários dos Usuários</p>
-                    <p class="lead">Veja o que nossos usuários têm a dizer sobre nós:</p>
+        <section class="comentario h-100 d-flex" style="margin-left: 0%;">
+        
+            <div class="container mt-5 justify-content-start ">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <h2>Comente aqui</h2>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Comente o que achou aqui!!</h5>
+                                <form method="post" action="../../back/controller/comentario.php" class="form d-block">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="comentario" rows="2" cols="70"></textarea>
+                                    </div>
+                                    <button type="submit" class="enviar_comentario btn btn-primary mt-2">Enviar Comentário</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-        <hr>
-        <section class="comentario container h-100 d-flex justify-content-center align-items-center">
 
-            <form method="post" action="../../back/controller/comentario.php" class="form d-block>
-                <label for="comentario">Comente aqui o que achou!!</label><br>
-
-                <textarea class="form-control" id="comentario" name="text_comentario" rows="1" cols="70"></textarea><br> <!-- tem que ser validado no backend-->
-                <div class="">
-
-                    <button type="submit" class="enviar_comentario btn btn-primary">Enviar</button>
-                </div>
-            </form>
-
-            <?php if (!isset($_SESSION['email']) == true) : // vai ter que ser outra logica ?>
+            <?php if (!isset($_SESSION['email']) == true) : // vai ter que ser outra logica 
+            ?>
                 <div class="modal" id="modalErro">
                     <div class="modal-dialog draggable">
                         <div class="modal-content">

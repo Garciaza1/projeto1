@@ -64,14 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             header('Location: ../../front/pages/login.php');
             $_SESSION['validation_errors'] = "O campo email é obrigatório <br> Já tem cadastro?";
-            
         } elseif (isset($_POST['submit']) && empty($_POST['text_senha'])) {
 
             header('Location: ../../front/pages/login.php');
             $_SESSION['validation_errors'] = "O campo senha é obrigatório <br> Já tem cadastro?";
-
         }
-    
+
         //if (isset($_POST['submit'])) $_SESSION['validation_errors'] = "Email ou senha não foram preenchidos. ";
     }
 }
