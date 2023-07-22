@@ -10,9 +10,6 @@ $telefone = $_POST['text_phone'];
 include_once('../config.php');
 $dados = [$nome, $email, $senha, $sexo, $data_nasc, $telefone];
 
-echo "<pre>";
-print_r($dados);
-
 $result = mysqli_query(
     $conexao,
     "INSERT INTO usuario(nome,senha,sexo,telefone,email,dataNasc,criadoEm) VALUES "

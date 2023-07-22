@@ -17,21 +17,21 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
     //header('Location: pages/login.php');
 } else {
-    
+
     $logado = $_SESSION['email'];
     $user = $_SESSION['user_name'];
     $user_id = $_SESSION['user_id'];
-     $perfil =[
+    $perfil = [
         $user_id => " Id: " . $user_id,
         $user => "Nome: " . $user,
         $logado => "Email: " . $logado,
-];
+    ];
     // essas informações tem que ser guardadas no menu de perfil.
-    foreach( $perfil as $dados){
+    /*
+    foreach ($perfil as $dados) {
         print_r(" | " . $dados);
-
-    } 
-    
+    }
+    */
 }
 
 ?>
@@ -56,15 +56,15 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
 <body data-bs-theme="dark">
 
-<!---------- inicio do header -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <header class="">
+    <!---------- inicio do header -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <header class="pt-1">
         <div class="logo d-flex">
             <img height="60px" src="assets/imagens/logo1.png" alt="logo">
             <H1>PROJETO</H1>
         </div>
-        
+
         <?php if (isset($logado)) : ?>
-            <div class="">
+            <div class="bg-light-subtle border border-secundary-subtle rounded-3 p-2">
                 <?= $logado . ' está logado :)' ?>
             </div>
         <?php endif; ?>
@@ -77,44 +77,21 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             <?php endif; ?>
             <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
         </div>
-        <div class="d-flex">
-            <?php if (isset($_SESSION['email']) == true) : ?>
-                <a href="../back/model/sair.php" class="btn btn-danger me-5 ">
-                    Sair
-                </a>
-            <?php endif; ?>
-        </div>
 
         <?php if (isset($logado)) : ?>
-            <div class="container">
-                <div class="">
-                    <button type="button" class="btn btn-light row" id="menu-icon">
-                        <div class="rounded-circle">
-                            <img height="30px" src="assets/imagens/peril-2.png" alt="perfil">
-                            <?= $logado . ':)' ?>
-                        </div>
-                        
-                    </button>
-                    
-                    <?php foreach($perfil as $dados) : ?>
-                    <div class="d-none row border border-sucsses" id="menu" style="background-color: black">
-                            <ul>
-                                <li>
-                                    <?php print_r($dados. "<hr>")  ?>
-                                </li>
-                            </ul>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img height="30px" src="assets/imagens/peril-2.png" alt="perfil">
+                    <i class="fa-regular fa-user me-2"></i><?= $user ?>
+                </button>
+                <ul class="dropdown-menu">
+                    <?php foreach ($perfil as $dados) : ?>
+                        <?php print_r("<li class=\"dropdown-item\">" . $dados . "</li> <hr class=\"dropdown-divider\">")  ?>
+                    <?php endforeach; ?>
+                    <li> <a class="dropdown-item" href="../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
+                </ul>
+            </div>
         <?php endif; ?>
-
-
-            <script>
-                document.getElementById('menu-icon').addEventListener('click', () => {
-                    document.getElementById('menu').classList.toggle("d-none")
-                })
-            </script>
     </header>
 
     <script>
