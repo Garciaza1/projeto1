@@ -59,7 +59,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <!---------- inicio do header -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <header class="pt-1">
         <div class="logo d-flex">
-            <img height="60px" src="assets/imagens/logo1.png" alt="logo">
+            <img height="60px" src="assets/imagens/logo1.png" alt="logo" class="p-1">
             <H1>PROJETO</H1>
         </div>
 
