@@ -36,9 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_num_rows($result) < 1) {
             // Não encontrou perfil com o nome ou senha fornecidos
+
             $_SESSION['validation_errors'] = "Não foi encontrado perfil com esse nome ou senha.";
+
             unset($_SESSION['email']);
             unset($_SESSION['senha']);
+
             header('location: ../../front/pages/login.php');
         } else {
             // Inicia a sessão e redireciona para a página 2
@@ -50,8 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_name'] = $user['nome'];
 
             if (isset($_SESSION['email']) == true && isset($_SESSION['senha']) == true) {
+                
                 header('Location: ../../front/index.php');
+
             } else {
+                
                 //erro de servidor 
                 $_SESSION['server_error'] = "erro no servidor alguma coisa na sessão deu errado!!";
             }
@@ -64,10 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             header('Location: ../../front/pages/login.php');
             $_SESSION['validation_errors'] = "O campo email é obrigatório <br> Já tem cadastro?";
+
         } elseif (isset($_POST['submit']) && empty($_POST['text_senha'])) {
 
             header('Location: ../../front/pages/login.php');
             $_SESSION['validation_errors'] = "O campo senha é obrigatório <br> Já tem cadastro?";
+
         }
 
         //if (isset($_POST['submit'])) $_SESSION['validation_errors'] = "Email ou senha não foram preenchidos. ";

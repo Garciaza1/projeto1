@@ -14,4 +14,48 @@
         <?php endif; ?>
 
 
+
+//incluir dps
+// Verifica se o formulário de edição do comentário foi enviado
+if (isset($_POST['editar_comentario']) && !empty($_POST['novo_comentario'])) {
+    // Obtém o novo comentário enviado pelo formulário
+    $novo_comentario = $_POST['novo_comentario'];
+
+    // Realiza o update do comentário no banco de dados
+    $sql = "UPDATE comentarios SET comentario = '$novo_comentario' WHERE id_comentario = $id_comentario";
+    mysqli_query($conexao, $sql);
+}
+
+// Consulta para obter o comentário da pessoa logada
+$result['select_comentario_pessoal'] = mysqli_query(
+    $conexao,
+    "SELECT u.nome, c.comentario, c.id_comentario, u.id " .
+    "FROM comentarios c INNER JOIN " .
+    "usuario u ON c.id_comentario = u.id WHERE " .
+    "c.id_comentario = $id_comentario;"
+);
+
+// Verifica se o usuário logado é o autor do comentário
+if (mysqli_num_rows($result['select_comentario_pessoal']) > 0) {
+    $comentario = mysqli_fetch_assoc($result['select_comentario_pessoal']);
+    $id_autor_comentario = $comentario['id']; // ID do autor do comentário
+
+    // Verifica se o usuário logado é o mesmo que fez o comentário
+    if ($id_usuario_logado === $id_autor_comentario) {
+        // Exibe o formulário de edição do comentário
+        ?>
+        <form action="" method="post">
+            <textarea name="novo_comentario"><?= $comentario['comentario'] ?></textarea>
+            <button type="submit" name="editar_comentario">Editar Comentário</button>
+        </form>
+        <?php
+    } else {
+        // Exibe apenas o comentário sem opção de edição
+        echo "<p>{$comentario['comentario']}</p>";
+    }
+} else {
+    // Comentário não encontrado
+    echo "Comentário não encontrado.";
+}
+
         

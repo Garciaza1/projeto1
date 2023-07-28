@@ -70,7 +70,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <header class="container-fluid pt-3">
 
         <div class="logo d-flex">
-            <img height="60px" src="../assets/imagens/logo1.png" alt="logo"  class="p-1">
+            <img height="60px" src="../assets/imagens/logo1.png" alt="logo" class="p-1">
             <h2>FGB bate papos</H2>
         </div>
 
@@ -110,7 +110,8 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
         <div class="col-md-8 offset-md-2">
             <h2>Seção de Comentários</h2>
         </div>
-        <?php if (mysqli_num_rows($result['select_todos_comentarios']) > 0) : // tem que funcionar sem o login.
+
+        <?php if (mysqli_num_rows($result['select_todos_comentarios']) > 0) : // tem que funcionar sem o login. 
         ?>
             <section class="comentario mt-5 d-grid justify-content-center" style="margin-left: 0%;">
                 <div class="jumbotron jumbotron-fluid bg-secondary text-white border border- rounded row">
@@ -125,9 +126,8 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 </div>
             </section>
         <?php endif; ?>
-
         <section class="comentario h-100 d-flex" style="margin-left: 0%;">
-        
+
             <div class="container mt-5 justify-content-start ">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
@@ -137,8 +137,10 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                 <h5 class="card-title">Comente o que achou aqui!!</h5>
                                 <form method="post" action="../../back/controller/comentario.php" class="form d-block">
                                     <div class="form-group">
-                                        <textarea class="form-control" id="comentario" rows="2" cols="70"></textarea>
+                                        <textarea class="form-control" name="text_comentario" id="comentario" rows="2" cols="70"></textarea>
                                     </div>
+                                    <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar
+                                    ?>
                                     <button type="submit" class="enviar_comentario btn btn-primary mt-2">Enviar Comentário</button>
                                 </form>
                             </div>
@@ -147,8 +149,10 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 </div>
             </div>
 
-            <?php if (!isset($_SESSION['email']) == true) : // vai ter que ser outra logica 
+            <?php //if (!isset($_SESSION['email']) == true) : // vai ter que ser outra logica 
             ?>
+
+            <?php if (!empty($validation_errors)) : ?>
                 <div class="modal" id="modalErro">
                     <div class="modal-dialog draggable">
                         <div class="modal-content">
@@ -157,38 +161,39 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                 <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
                             </div>
                             <div class="modal-body">
-                                <?php if (!empty($validation_errors)) : ?>
-                                    <div class="alert alert-danger p-2">
-                                        <ul>
-                                            <?php foreach ($validation_errors as $error) : ?>
-                                                <li><?= $error ?></li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    </div>
-                                <?php endif; ?>
+                                <div class="alert alert-danger p-2">
+                                    <ul>
+                                        <?php foreach ($validation_errors as $error) : ?>
+                                            <li><?= $error ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
 
-                                <?php if (isset($server_error)) : ?>
-                                    <div class="alert alert-danger p-2 text-center">
-                                        <?= $server_error ?>
-                                    </div>
-                                <?php endif; ?>
+                            <?php if (isset($server_error)) : ?>
+                                <div class="alert alert-danger p-2 text-center">
+                                    <?= $server_error ?>
+                                </div>
+                            <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
-            <script>
-                // Exibir o modal de erro automaticamente
-                document.getElementById("modalErro").style.display = "flex";
-                document.getElementById("fechar").addEventListener('click', () => {
-                    document.getElementById("modalErro").classList.toggle("d-none");
-                })
+                <?php // endif; 
+                ?>
 
-                // Inicializa a função draggable do jQuery UI para tornar o modal movível
-                $(function() {
-                    $(".draggable").draggable();
-                });
-            </script>';
+                <script>
+                    // Exibir o modal de erro automaticamente
+                    document.getElementById("modalErro").style.display = "flex";
+                    document.getElementById("fechar").addEventListener('click', () => {
+                        document.getElementById("modalErro").classList.toggle("d-none");
+                    })
+
+                    // Inicializa a função draggable do jQuery UI para tornar o modal movível
+                    $(function() {
+                        $(".draggable").draggable();
+                    });
+                </script>';
 
         </section>
     </main>
