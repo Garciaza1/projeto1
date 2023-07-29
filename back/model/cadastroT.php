@@ -15,6 +15,7 @@ $telefone = $_POST['text_phone'];
 //$varD = var_dump(preg_match("/^[1]{2}/^[9]{1}\d{9}/", $telefone) == true); validação
 include_once('../config.php');
 $dados = [$nome, $email, $senha, $sexo, $data_nasc, $telefone];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = mysqli_query(
@@ -22,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "INSERT INTO usuario(nome,senha,sexo,telefone,email,dataNasc,criadoEm) VALUES "
         . "('$nome', '$senha', '$sexo', '$telefone', '$email', '$data_nasc', NOW())"
     );
+    header('Location:../../front/pages/login.php');
 
 }else {
     [$_SESSION['server_error']] = "não foi possível realizar co cadastro";
