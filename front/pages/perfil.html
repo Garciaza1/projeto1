@@ -1,0 +1,162 @@
+<?php
+
+include_once("../../back/config.php");
+
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)) {
+    //print_r($_SESSION);
+
+    if (isset($_SESSION)) {
+
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_id']);
+    }
+
+    header('Location: pages/login.php');
+} else {
+
+    $logado = $_SESSION['email'];
+    $user = $_SESSION['user_name'];
+    $user_id = $_SESSION['user_id'];
+    /*
+    $partesDoNome = explode(" ", $user);
+    $primeiro_nome = $partesDoNome[0];
+    */
+    $perfil = [
+        $user_id => " id: " . $user_id,
+        $user => "nome: " . $user,
+        $logado => "email: " . $logado,
+    ];
+    // Use a função explode para dividir o nome em partes com base no espaço em branco
+
+
+    // Pegue o primeiro elemento do array, que é o primeiro nome
+
+    include_once("../../back/controller/comentario.php");
+}
+
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <!--   JQuery   -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- links dos arquivos assets -->
+    <link rel="stylesheet" href="../assets/arquivo.css">
+    <script defer src="../assets/arquivo.js"></script>
+    <title>Perfil</title>
+</head>
+
+
+<body data-bs-theme="dark">
+    <!-- 
+        fazer um esquema de apresentação e configuração do perfil 
+        ARRANJAR UM JEITO DE DEIXAR O HEADER DO LADO DA PAGINA. 
+        fazer uma foto de peril e colocar no banco de dados. se n tiver nenhuma ter uma default.
+
+    -->
+    <header class="container-fluid pt-3">
+
+        <div class="logo d-flex">
+            <img height="60px" src="../assets/imagens/logo1.png" alt="logo" class="p-1">
+            <h2>FGB bate papos</H2>
+        </div>
+
+        <?php if (isset($logado)) : ?>
+        <div class="bg-light-subtle border border-secundary-subtle rounded-3 p-2">
+            <?= $logado . ' está logado :)' ?>
+        </div>
+        <?php endif; ?>
+
+    </header>
+    <hr>
+    <div class="container-fluid p-5">
+        <div class="row m-3">
+            <!-- Barra de navegação na parte esquerda -->
+            <nav class="col-3 border-end border-2 d-flex justify-content-center">
+                <div class="menu-header justfy-content-between text-center">
+                    <?php if (!isset($logado)) : ?>
+                    <div>
+                        <a class="btn btn-info d-block mb-3" href="cadastro.php">Cadastrar</a>
+                        <a class="btn btn-info d-block mb-3" href="login.php">Login</a>
+                        <?php endif; ?>
+                        <a class="btn btn-info d-block mb-3" href="../index.php">Home</a>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="col-9 align-items-center">
+
+                <!-- alterar nome -->
+                <section class="">
+                    <h5 class="card-title pb-1">Altrar nome:</h5>
+                    <form method="post" action="#" class="form d-block">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="text_mudar_nome" id="mudar_nome"></input>
+                        </div>
+                        <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar ?>
+                        <button type="submit" class="mudar_nome btn btn-primary mt-2">Mudar</button>
+                    </form>
+                </section>
+
+                <!-- alterar email -->
+                <section>
+
+
+                </section>
+
+                <!-- alterar senha (fazer pagina de alteração de senha) -->
+                <section>
+
+
+                </section>
+
+                <!-- alterar aniversario -->
+                <section>
+
+
+                </section>
+
+                <!-- alterar telefone -->
+                <section>
+
+
+                </section>
+
+                <!-- alterar genero -->
+                <section>
+
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- inicio do footer ----------------------------- -->
+
+    <hr>
+
+    <footer class="footer p-3 text-center">
+        &copy; Todos os direitos reservados. | &reg;since 2023
+    </footer>
+</body>
+
+</html>

@@ -42,6 +42,9 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- link flaticons -->
+    <link href="/website/css/uicons-bold-rounded.css" rel="stylesheet">
+
     <!-- link bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -73,9 +76,9 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 <div>
                     <a class="btn btn-info " href="pages/cadastro.php">Cadastrar</a>
                     <a class="btn btn-info " href="pages/login.php">Login</a>
+                    <?php endif; ?>
+                    <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
                 </div>
-            <?php endif; ?>
-            <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
         </div>
 
         <?php if (isset($logado)) : ?>
@@ -85,8 +88,9 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                     <i class="fa-regular fa-user me-2"></i><?= $user ?>
                 </button>
                 <ul class="dropdown-menu">
+                    <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. -->
                     <?php foreach ($perfil as $dados) : ?>
-                        <?php print_r("<li class=\"dropdown-item\">" . $dados . "</li> <hr class=\"dropdown-divider\">")  ?>
+                        <?php print_r("<li class=\"dropdown-item\"> <a class=\"text-white-50\" href=\"perfil.html\">" .  $dados . "</li></a> <hr class=\"dropdown-divider\">")  ?>
                     <?php endforeach; ?>
                     <li> <a class="dropdown-item" href="../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
                 </ul>
