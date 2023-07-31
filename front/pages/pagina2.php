@@ -55,6 +55,9 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="assets/fontawesome/all.min.css">
+
     <!-- links dos arquivos assets -->
     <link rel="stylesheet" href="../assets/arquivo.css">
     <script defer src="../assets/arquivo.js"></script>
@@ -84,8 +87,8 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 <div>
                     <a class="btn btn-info " href="cadastro.php">Cadastrar</a>
                     <a class="btn btn-info " href="login.php">Login</a>
-                    <?php endif; ?>
-                    <a class="btn btn-info " href="../index.php">Home</a>
+                <?php endif; ?>
+                <a class="btn btn-info " href="../index.php">Home</a>
                 </div>
         </div>
 
@@ -107,102 +110,102 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     </header>
     <hr>
     <!-- inicio do main  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-                    <main>
-                        <div class="col-md-8 offset-md-2">
-                            <h2>Seção de Comentários</h2>
-                        </div>
+    <main>
+        <div class="col-md-8 offset-md-2">
+            <h2>Seção de Comentários</h2>
+        </div>
 
-                        <?php if (mysqli_num_rows($result['select_todos_comentarios']) > 0) : // tem que funcionar sem o login. 
-                        ?>
-                            <section class="comentario mt-5 d-grid justify-content-center" style="margin-left: 0%;">
-                                <div class="jumbotron jumbotron-fluid bg-secondary text-white border border- rounded row">
-                                    <div class="container align-items-start col-12">
-                                        <?php while ($comentarios = mysqli_fetch_assoc($result['select_todos_comentarios'])) : ?>
-                                            <?php $autor = $comentarios['nome'];
-                                            $comentario = $comentarios['comentario']; ?>
-                                            <h5 class="display-9 pt-2"><?= $autor ?></h5>
-                                            <p class="lead p-1"><?= $comentario . "<hr>" ?></p>
-                                        <?php endwhile; ?>
-                                    </div>
-                                </div>
-                            </section>
-                        <?php endif; ?>
-                        <section class="comentario h-100 d-flex" style="margin-left: 0%;">
+        <?php if (mysqli_num_rows($result['select_todos_comentarios']) > 0) : // tem que funcionar sem o login. 
+        ?>
+            <section class="comentario mt-5 d-grid justify-content-center" style="margin-left: 0%;">
+                <div class="jumbotron jumbotron-fluid bg-secondary text-white border border- rounded row">
+                    <div class="container align-items-start col-12">
+                        <?php while ($comentarios = mysqli_fetch_assoc($result['select_todos_comentarios'])) : ?>
+                            <?php $autor = $comentarios['nome'];
+                            $comentario = $comentarios['comentario']; ?>
+                            <h5 class="display-9 pt-2"><?= $autor ?></h5>
+                            <p class="lead p-1"><?= $comentario . "<hr>" ?></p>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
+        <section class="comentario h-100 d-flex" style="margin-left: 0%;">
 
-                            <div class="container mt-5 justify-content-start ">
-                                <div class="row">
-                                    <div class="col-md-8 offset-md-2">
-                                        <h2>Comente aqui</h2>
-                                        <div class="card mt-3">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Comente o que achou aqui!!</h5>
-                                                <form method="post" action="../../back/controller/comentario.php" class="form d-block">
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" name="text_comentario" id="comentario" rows="2" cols="70"></textarea>
-                                                    </div>
-                                                    <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar
-                                                    ?>
-                                                    <button type="submit" class="enviar_comentario btn btn-primary mt-2">Enviar Comentário</button>
-                                                </form>
-                                            </div>
-                                        </div>
+            <div class="container mt-5 justify-content-start ">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <h2>Comente aqui</h2>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Comente o que achou aqui!!</h5>
+                                <form method="post" action="../../back/controller/comentario.php" class="form d-block">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="text_comentario" id="comentario" rows="2" cols="70"></textarea>
                                     </div>
-                                </div>
+                                    <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar
+                                    ?>
+                                    <button type="submit" class="enviar_comentario btn btn-primary mt-2">Enviar Comentário</button>
+                                </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <?php //if (!isset($_SESSION['email']) == true) : // vai ter que ser outra logica 
-                            ?>
+            <?php //if (!isset($_SESSION['email']) == true) : // vai ter que ser outra logica 
+            ?>
 
-                            <?php if (!empty($validation_errors)) : ?>
-                                <div class="modal" id="modalErro">
-                                    <div class="modal-dialog draggable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Erro</h5>
-                                                <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="alert alert-danger p-2">
-                                                    <ul>
-                                                        <?php foreach ($validation_errors as $error) : ?>
-                                                            <li><?= $error ?></li>
-                                                        <?php endforeach; ?>
-                                                    </ul>
-                                                </div>
-                                            <?php endif; ?>
-
-                                            <?php if (isset($server_error)) : ?>
-                                                <div class="alert alert-danger p-2 text-center">
-                                                    <?= $server_error ?>
-                                                </div>
-                                            <?php endif; ?>
-                                            </div>
-                                        </div>
-                                    </div>
+            <?php if (!empty($validation_errors)) : ?>
+                <div class="modal" id="modalErro">
+                    <div class="modal-dialog draggable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Erro</h5>
+                                <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger p-2">
+                                    <ul>
+                                        <?php foreach ($validation_errors as $error) : ?>
+                                            <li><?= $error ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
                                 </div>
-                                <?php // endif; 
-                                ?>
+                            <?php endif; ?>
 
-                                <script>
-                                    // Exibir o modal de erro automaticamente
-                                    document.getElementById("modalErro").style.display = "flex";
-                                    document.getElementById("fechar").addEventListener('click', () => {
-                                        document.getElementById("modalErro").classList.toggle("d-none");
-                                    })
+                            <?php if (isset($server_error)) : ?>
+                                <div class="alert alert-danger p-2 text-center">
+                                    <?= $server_error ?>
+                                </div>
+                            <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php // endif; 
+                ?>
 
-                                    // Inicializa a função draggable do jQuery UI para tornar o modal movível
-                                    $(function() {
-                                        $(".draggable").draggable();
-                                    });
-                                </script>';
+                <script>
+                    // Exibir o modal de erro automaticamente
+                    document.getElementById("modalErro").style.display = "flex";
+                    document.getElementById("fechar").addEventListener('click', () => {
+                        document.getElementById("modalErro").classList.toggle("d-none");
+                    })
 
-                        </section>
-                    </main>
+                    // Inicializa a função draggable do jQuery UI para tornar o modal movível
+                    $(function() {
+                        $(".draggable").draggable();
+                    });
+                </script>';
 
-                    <hr>
-                    <footer class="footer p-3 text-center">
-                        &copy; Todos os direitos reservados. | &reg;since 2023
-                    </footer>
+        </section>
+    </main>
+
+    <hr>
+    <footer class="footer p-3 text-center">
+        &copy; Todos os direitos reservados. | &reg;since 2023
+    </footer>
 
 </body>
 

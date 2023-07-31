@@ -15,6 +15,9 @@ include_once("../../back/config.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="assets/fontawesome/all.min.css">
+
     <!-- links dos arquivos assets -->
     <link rel="stylesheet" href="assets/arquivo.css">
     <script defer src="assets/arquivo.js"></script>
@@ -62,7 +65,7 @@ include_once("../../back/config.php");
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="text_birthdate" class="form-label">Data de nascimento</label>
-                                        <input type="text" class="form-control" name="text_birthdate" id="text_birthdate" required>
+                                        <input type="date" class="form-control" name="text_birthdate" id="text_birthdate" required>
                                     </div>
                                 </div>
 
@@ -72,7 +75,7 @@ include_once("../../back/config.php");
                                         <input type="email" class="form-control" name="text_email" id="text_email" required>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="text_email" class="form-label">Senha</label>
+                                        <label for="text_senha" class="form-label">Senha</label>
                                         <input type="Senha" class="form-control" name="text_senha" id="text_senha" required>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -82,7 +85,7 @@ include_once("../../back/config.php");
                                 </div>
 
                                 <div class="mb-3 text-center">
-                                    <a href="#" onclick="limparFrom()" class="btn btn-secondary" id="LimparBtn"><i class="fa-solid fa-xmark me-2"></i>Limpar</a>
+                                    <button type="reset" onclick="limparFrom()" class="btn btn-secondary" id="LimparBtn"><i class="fa-solid fa-xmark me-2"></i>Limpar</button>
                                     <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
                                     <button type="submit" name="submit" id="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
                                 </div>

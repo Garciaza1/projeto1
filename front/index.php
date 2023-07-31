@@ -42,6 +42,10 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="assets/fontawesome/all.min.css">
+
     <!-- link flaticons -->
     <link href="/website/css/uicons-bold-rounded.css" rel="stylesheet">
 
@@ -76,8 +80,8 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 <div>
                     <a class="btn btn-info " href="pages/cadastro.php">Cadastrar</a>
                     <a class="btn btn-info " href="pages/login.php">Login</a>
-                    <?php endif; ?>
-                    <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
+                <?php endif; ?>
+                <a class="btn btn-info " href="pages/pagina2.php">Outra Pagina</a>
                 </div>
         </div>
 
@@ -85,12 +89,12 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img height="30px" src="assets/imagens/peril-2.png" alt="perfil">
-                    <i class="fa-regular fa-user me-2"></i><?= $user ?>
+                    <i class="me-2"></i><?= $user ?> <!-- fa-regular fa-user -->
                 </button>
                 <ul class="dropdown-menu">
-                    <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. -->
+                    <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. colocar icones antes de cada link  style=\"font-family: Arial, Helvetica, sans-serif;\" -->
                     <?php foreach ($perfil as $dados) : ?>
-                        <?php print_r("<li class=\"dropdown-item\"> <a class=\"text-white-50\" href=\"perfil.html\">" .  $dados . "</li></a> <hr class=\"dropdown-divider\">")  ?>
+                        <?php print_r("<li class=\"dropdown-item\" > <a class=\"text-white-50\" href=\"pages/perfil.html\">" .  $dados . "</a></li> <hr class=\"dropdown-divider\">")  ?>
                     <?php endforeach; ?>
                     <li> <a class="dropdown-item" href="../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
                 </ul>
