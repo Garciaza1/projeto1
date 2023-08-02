@@ -42,9 +42,9 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+
     <!-- fontawesome -->
-    <link rel="stylesheet" href="assets/fontawesome/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- link flaticons -->
     <link href="/website/css/uicons-bold-rounded.css" rel="stylesheet">
@@ -94,7 +94,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 <ul class="dropdown-menu">
                     <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. colocar icones antes de cada link  style=\"font-family: Arial, Helvetica, sans-serif;\" -->
                     <?php foreach ($perfil as $dados) : ?>
-                        <?php print_r("<li class=\"dropdown-item\" > <a class=\"text-white-50\" href=\"pages/perfil.html\">" .  $dados . "</a></li> <hr class=\"dropdown-divider\">")  ?>
+                        <?php print_r("<li class=\"dropdown-item\" > <a class=\"text-white-50\" href=\"pages/perfil.php\">" .  $dados . "</a></li> <hr class=\"dropdown-divider\">")  ?>
                     <?php endforeach; ?>
                     <li> <a class="dropdown-item" href="../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
                 </ul>
@@ -107,11 +107,11 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     </script>
 
     <!-- INICIO DO MAIN --------------------------------------------------------------------------------------------------------------------------------- -->
-    <main class="justify-content-center">
-        <aside>
-            <div class=" justify-content-between">
+    <main class="">
+        <aside class="d-grid">
+            <div class="row">
                 <nav class="menu1 border border-dark-subtle p-3">
-                    <div class="justify-content-start ">
+                    <div class="justify-content-start col-12">
                         <!-- fazer os botoes girando abrirem  as caixas de text e imagens emm JS-->
                         <label>1 </label>
                         <button class="border spinner-border " id="btn1">
@@ -122,10 +122,14 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             <img width="30px" src="https://www.otempo.com.br/image/contentid/policy:1.2873697:1685219245/MC-Pipokinha-jpg.jpg?f=3x2&w=1224" alt="">
                         </button>
                         <label>3 </label>
-                        <button class="border spinner-border " id="btn3">
+                        <button class="border spinner-border me-5" id="btn3">
                             <img width="30px" src="https://i1.sndcdn.com/artworks-000465638568-6mvcd2-t500x500.jpg" alt="">
                         </button>
+
+                        ☝🤓Sugiro que coloque dados falsos e que na hora de trocar nesta pagina tenha certeza
+
                     </div>
+
                 </nav>
             </div>
         </aside>

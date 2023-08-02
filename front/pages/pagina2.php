@@ -55,8 +55,9 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-    <!-- fontawesome -->
-    <link rel="stylesheet" href="assets/fontawesome/all.min.css">
+ <!-- fontawesome -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <!-- links dos arquivos assets -->
     <link rel="stylesheet" href="../assets/arquivo.css">
@@ -96,12 +97,12 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img height="30px" src="../assets/imagens/peril-2.png" alt="perfil">
-                    <i class="fa-regular fa-user me-2"></i><?= $user ?>
+                    <i class=""></i><?= $user ?>
                 </button>
                 <ul class="dropdown-menu">
                     <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. -->
                     <?php foreach ($perfil as $dados) : ?>
-                        <?php print_r("<li class=\"dropdown-item\"> <a class=\"text-white-50\" href=\"perfil.html\">" .  $dados . "</li></a> <hr class=\"dropdown-divider\">")  ?>
+                        <?php print_r("<li class=\"dropdown-item\"> <a class=\"text-white-50\" href=\"perfil.php\">" .  $dados . "</li></a> <hr class=\"dropdown-divider\">")  ?>
                     <?php endforeach; ?>
                     <li> <a class="dropdown-item" href="../../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
                 </ul>

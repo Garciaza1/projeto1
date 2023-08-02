@@ -16,16 +16,19 @@ include_once("../../back/config.php");
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <!-- fontawesome -->
-    <link rel="stylesheet" href="assets/fontawesome/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--  intl-tel-input  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
     <!-- links dos arquivos assets -->
     <link rel="stylesheet" href="assets/arquivo.css">
     <script defer src="assets/arquivo.js"></script>
 
-    <!-- flatpickr -->
-    <link rel="stylesheet" href="/assets/flatpickr/flatpickr.min.css">
-    <script defer src="/assets/arquivo.js"></script>
-
+    <!--  Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- posteriormente colocar icones na guia do site-->
     <title>Cadastro</title>
@@ -65,7 +68,7 @@ include_once("../../back/config.php");
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="text_birthdate" class="form-label">Data de nascimento</label>
-                                        <input type="date" class="form-control" name="text_birthdate" id="text_birthdate" required>
+                                        <input type="date" class="form-control" name="text_birthdate" id="text_birthdate" required placeholder="Escolha uma data aqui">
                                     </div>
                                 </div>
 
@@ -78,8 +81,8 @@ include_once("../../back/config.php");
                                         <label for="text_senha" class="form-label">Senha</label>
                                         <input type="Senha" class="form-control" name="text_senha" id="text_senha" required>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="text_phone" class="form-label">Telefone</label>
+                                    <div class="col-md-6 col-sm-12 mt-3">
+                                        <label for="text_phone" class="form-label">Telefone</label><br>
                                         <input type="text" class="form-control" name="text_phone" id="text_phone" required>
                                     </div>
                                 </div>
@@ -119,6 +122,13 @@ include_once("../../back/config.php");
         flatpickr("#text_birthdate", {
             dateFormat: "d-m-Y"
         })
+    </script>
+
+    <script>
+        const phoneInputField = document.querySelector("#text_phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
     </script>
 
 </body>
