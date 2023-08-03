@@ -88,7 +88,7 @@ include_once("../../back/config.php");
                                 </div>
 
                                 <div class="mb-3 text-center">
-                                    <button type="reset" onclick="limparFrom()" class="btn btn-secondary" id="LimparBtn"><i class="fa-solid fa-xmark me-2"></i>Limpar</button>
+                                    <button type="reset" onclick="limparFrom()" class="btn btn-secondary" id="LimparBtn"><i class="fa-solid fa-trash me-2"></i>Limpar</button>
                                     <a href="../index.php" class="btn btn-secondary"><i class="fa-solid fa-xmark me-2"></i>Cancelar</a>
                                     <button type="submit" name="submit" id="submit" class="btn btn-secondary"><i class="fa-regular fa-floppy-disk me-2"></i>Guardar</button>
                                 </div>
@@ -120,15 +120,18 @@ include_once("../../back/config.php");
 
     <script>
         flatpickr("#text_birthdate", {
-            dateFormat: "d-m-Y"
+            dateFormat: "d/m/Y"
         })
     </script>
 
     <script>
-        const phoneInputField = document.querySelector("#text_phone");
-        const phoneInput = window.intlTelInput(phoneInputField, {
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+
+        const input = document.querySelector("#text_phone");
+        window.intlTelInput(input, {
+            initialCountry: "br",
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // "/intl-tel-input/js/utils.js?1690975972744" // just for formatting/placeholders etc
         });
+
     </script>
 
 </body>

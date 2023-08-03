@@ -63,6 +63,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
     <!--  Flatpickr -->
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -388,6 +389,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 <script>
     const phoneInputField = document.querySelector("#mudar_tel");
     const phoneInput = window.intlTelInput(phoneInputField, {
+        initialCountry: "br",
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
 </script>
@@ -395,7 +397,8 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 <!-- estiliza o form data -->
 <script>
     flatpickr("#mudar_data", {
-        dateFormat: "d-m-Y"
+        inline: true,
+    dateFormat: "d/m/Y",
     });
 </script>
 
