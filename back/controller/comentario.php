@@ -41,11 +41,13 @@ if (isset($_SESSION['email']) == true) {
 
     $result['select_todos_comentarios'] = mysqli_query(
         $conexao,
-        "SELECT u.nome, c.comentario " .
+        "SELECT u.nome, c.comentario, c.id, c.id_comentario " .
             "FROM comentarios c INNER JOIN " .
             "usuario u ON c.id_comentario = u.id " .
             "ORDER BY c.id;"
     );
+
+
 } elseif (!isset($_SESSION['email']) == true) {
 
     $result['select_todos_comentarios'] = mysqli_query(
@@ -60,6 +62,7 @@ if (isset($_SESSION['email']) == true) {
         header('Location: ../../front/pages/pagina2.php');
         $_SESSION['validation_errors'] = "Não há comentarios ainda.";
     }
+
 }
 
 

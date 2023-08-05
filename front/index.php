@@ -16,6 +16,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     }
 
     //header('Location: pages/login.php');
+    echo "faça login";
 } else {
 
     $logado = $_SESSION['email'];

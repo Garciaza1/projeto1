@@ -1,7 +1,8 @@
 <?php
 
 include_once("../../back/config.php");
-
+include_once("../../back/model/update.php");
+// include_once('../../back/model/loginT.php');
 
 if (!isset($_SESSION)) {
     session_start();
@@ -16,30 +17,71 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
         unset($_SESSION['senha']);
         unset($_SESSION['user_name']);
         unset($_SESSION['user_id']);
+        $_SESSION['validation_errors'] = "faça um login primeiro campeão !!";
+        header('Location:login.php');
     }
-
-    header('Location: pages/login.php');
-    $_SESSION['validation_errors'] = "faça um login primeiro campeão !!";
 } else {
 
+    // função de ocultar a senha
+    function ocultarParte($str, $ocultarCaracter = '*', $numCaracteresVisiveis = 2)
+    {
+        $length = strlen($str);
+        $numCaracteresOcultar = max($length - $numCaracteresVisiveis, 0);
+        $ocultar = str_repeat($ocultarCaracter, $numCaracteresOcultar);
+        return substr_replace($str, $ocultar, 0, $length - $numCaracteresOcultar);
+    }
+
+    // caracteristicas do usuario:
     $logado = $_SESSION['email'];
     $user = $_SESSION['user_name'];
+
     $user_id = $_SESSION['user_id'];
-    /*
-    $partesDoNome = explode(" ", $user);
-    $primeiro_nome = $partesDoNome[0];
-    */
+
+
+    //definição do perfil para apresentação:
     $perfil = [
         $user_id => " id: " . $user_id,
         $user => "nome: " . $user,
         $logado => "email: " . $logado,
     ];
     // Use a função explode para dividir o nome em partes com base no espaço em branco
-
-
     // Pegue o primeiro elemento do array, que é o primeiro nome
 
-    include_once("../../back/controller/comentario.php");
+    if (!empty($perfil[$user_id])) {
+
+
+        $user_id;
+
+        $sqlSelect = "SELECT * FROM usuario WHERE id = '$user_id'";
+        include_once('../../back/config.php');
+
+        $result = $conexao->query($sqlSelect);
+
+        if ($result->num_rows > 0) {
+
+            while ($user_data = mysqli_fetch_assoc($result)) {
+
+                $nome = $user_data['nome'];
+                $email = $user_data['email'];
+                // validação senha
+                $senha = $user_data['senha'];
+                $senha_ocultada = ocultarParte($senha,'***',6);
+
+                $data_nasc = $user_data['dataNasc'];
+                $telefone = $user_data['telefone'];
+
+                $sexo = $user_data['sexo'];
+                if ($user_data['sexo'] == 'm') {
+                    $sexo = "Masculino";
+                } elseif ($user_data['sexo'] == 'f') {
+                    $sexo = "Feminino";
+                }
+            }
+        } else {
+            header('Location:perfil.php');
+            echo "deu ruim menos de 1";
+        }
+    }
 }
 
 ?>
@@ -100,7 +142,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             </div>
             <a class="btn btn-info d-block mb-3" href="../index.php">Home</a>
 
-            <?php if (isset($logado)) : ?>
+            
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img height="30px" src="../assets/imagens/peril-2.png" alt="perfil">
@@ -115,41 +157,40 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                     </ul>
                 </div>
             <?php endif; ?>
+        
 
     </header>
 
     <hr class="mt-5">
 
-    <h2 class="p-2 text-center"> Muito cuidado ao colocar seus dados pois este site não é seguro ainda
-        <br>
-        é apenas uma pagina de testes ✌
-    </h2>
-
-    <h3 class="p-2 text-center">
-        ☝🤓<br> Sugiro que coloque dados falsos e que na hora de trocar nesta pagina tenha certeza
-        de que vai lembrar da troca da informação no caso dela precisar ser validada no login.
-    </h3>
-
-
     <div class="container-fluid p-5">
         <div class="row m-3">
             <!-- Barra de navegação na parte esquerda -->
-            <nav class="col-3 border rounded-2 border-1 d-flex justify-content-center pt-5">
+            <nav class="col-3 border rounded-2 border-1 d-flex justify-content-center">
                 <div class="menu-header justfy-content-between text-center">
 
                     <div>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati corrupti quasi aut porro
-                            rerum delectus alias libero voluptate omnis, minus maiores quos iure dicta perspiciatis
-                            tempora iste nemo explicabo nisi?
+                        <p class="p-1">
+                        <h4>dados atuais do cliente:</h4>
+                        <br>Nome:<strong><?= ' ' .  $nome ?></strong>
+                        <br>Email:<strong><?= ' ' .  $email ?></strong>
+                        <br>Senha:<strong><?= ' ' . $senha_ocultada ?></strong>
+                        <br><a>esqueci a senha ...</a></strong>
+                        <br>Data De Nascimento:<strong><?= ' ' . $data_nasc ?></strong>
+                        <br>Telefone<strong><?= ' ' . $telefone ?></strong>
+                        <br>Sexo:<strong><?= ' ' .  $sexo ?></strong>
+                        <br>
+                        <a class="btn border border-2 btn-dark mt-4 mb-2" href="../../back/model/DELETE.php"> <i data-fa-symbol="delete" class="fa-solid fa-trash fa-fw me-2"></i>DELETAR PERFIL</a>
                         </p>
-                        <br>
                         <hr>
-                        <br>
-                        <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis mollitia ullam nihil
-                            odit nostrum pariatur fugit, temporibus culpa labore illo maiores earum expedita, ad quia
-                            doloribus omnis eaque cupiditate. Similique.
+                        <p class="pt-3">
+                            colocar o aviso:<br>PRECISA VALIDAR O RESTO E AJUSTAR A VALIDAÇÃO DE ERROS DO SESSION<br>
+                            Muito cuidado ao colocar seus dados pois este site não é seguro ainda
+                            <br>
+                            é apenas uma pagina de testes ✌
+                            ☝🤓<br> Sugiro que coloque dados falsos e que na hora de trocar nesta pagina tenha certeza
+                            de que vai lembrar da troca da informação no caso dela precisar ser validada no login.
+
                         </p>
                         <!-- 
 
@@ -177,14 +218,14 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="#" class="form d-block d-none">
+                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
                             <div class="form-group">
                                 <input type="text" class="form-control mb-2 mt-1" name="text_mudar_nome" id="mudar_nome"></input>
                             </div>
 
                             <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar 
                             ?>
-                            <button type="submit" class="mudar_nome btn btn-primary mt-2 btn-sm">Mudar nome</button>
+                            <button type="submit" name="update_name" class="mudar_nome btn btn-primary mt-2 btn-sm">Mudar nome</button>
 
                         </form>
 
@@ -197,7 +238,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                 ↧
                             </button>
                         </h5>
-                        <form method="post" action="#" class="form d-block d-none">
+                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
                             <div class="form-group">
 
                                 <label for="email_antigo">Email antigo: </label>
@@ -209,7 +250,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </div>
                             <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar 
                             ?>
-                            <button type="submit" class="mudar_email btn btn-primary mt-2">Mudar email</button>
+                            <button type="submit" name="update_email" class="mudar_email btn btn-primary mt-2">Mudar email</button>
                         </form>
 
                     </section>
@@ -221,11 +262,11 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                 ↧
                             </button>
                         </h5>
-                        <form method="post" action="#" class="form d-block d-none">
+                        <form method="post" action="" class="form d-block d-none">
                             <div class="form-group">
 
                                 <label for="senha_antiga">Senha antiga: </label>
-                                <input type="password" class="form-control" name="text_senha_antiga" id="senha_antiga"></input>
+                                <input type="password" class="form-control" name="text_senha_atual" id="senha_antiga"></input>
 
                                 <label for="senha_nova">Senha nova: </label>
                                 <input type="password" class="form-control" name="text_senha_nova" id="senha_nova"></input>
@@ -233,7 +274,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </div>
                             <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar 
                             ?>
-                            <button type="submit" class="mudar_senha btn btn-primary mt-2">Mudar senha</button>
+                            <button type="submit" name="update_senha" class="mudar_senha btn btn-primary mt-2">Mudar senha</button>
                         </form>
                     </section>
 
@@ -246,13 +287,13 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="#" class="form d-block d-none">
+                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
                             <div class="form-group">
-                                <input type="date" class="form-control" name="text_mudar_data" id="mudar_data" placeholder="escolha uma data"></input>
+                                <input type="date" class="form-control" name="mudar_data" id="mudar_data" placeholder="escolha uma data"></input>
                             </div>
                             <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar 
                             ?>
-                            <button type="submit" class="mudar_aniversario btn btn-primary mt-2">Mudar aniversario</button>
+                            <button type="submit" name="update_data" class="mudar_aniversario btn btn-primary mt-2">Mudar aniversario</button>
                         </form>
 
                     </section>
@@ -265,7 +306,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="#" class="form d-block d-none">
+                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
 
                             <div class="form-group">
                                 <input type="tel" class="form-control" name="text_mudar_telefone" id="mudar_tel"></input>
@@ -274,7 +315,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar 
                             ?>
 
-                            <button type="submit" class="mudar_tel btn btn-primary mt-2">Mudar telefone</button>
+                            <button type="submit" name="update_telefone" class="mudar_tel btn btn-primary mt-2">Mudar telefone</button>
 
                         </form>
 
@@ -288,7 +329,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="#" class="form d-flex d-none">
+                        <form method="post" action="../../back/model/update.php" class="form d-flex d-none">
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
 
@@ -301,7 +342,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                     <label class="form-check-label" for="radio_f">Feminino</label>
                                 </div>
                                 <div class="form-group mt-1 text-center">
-                                    <button type="submit" class="mudar_genero btn btn-primary mt-2">Mudar
+                                    <button type="submit" name="update_genero" class="mudar_genero btn btn-primary mt-2">Mudar
                                         genero</button>
                                     <?php // fazer a validação de $SESSION e se não tiver cadastrado aparece mensagem para se cadastrar 
                                     ?>
@@ -317,41 +358,43 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     </div>
     <!-- parte onde a pessoa excluiria a conta ou o cadastro dela -->
 
-<?php endif; ?>
+
+<!-- validação de erros ------------------------------------------->
 
 <?php if (!isset($logado)) : ?>
-    <?php $_SESSION['validation_errors'] = "precisa se cadastrar antes bobão "; ?>
-    <?php if (!empty($validation_errors)) : ?>
-        <div class="modal" id="modalErro">
-            <div class="modal-dialog draggable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Erro</h5>
-                        <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-danger p-2">
-                            <ul>
-                                <?php foreach ($validation_errors as $error) : ?>
-                                    <li>
-                                        <?= $error ?>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
+    <?php $_SESSION['validation_errors'] = "precisa estar logado antes bobão "; ?>
+<?php endif; ?>
 
-                    <?php if (isset($server_error)) : ?>
-                        <div class="alert alert-danger p-2 text-center">
-                            <?= $server_error ?>
-                        </div>
-                    <?php endif; ?>
+<?php if (!empty($validation_errors)) : ?>
+    <div class="modal" id="modalErro">
+        <div class="modal-dialog draggable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Erro</h5>
+                    <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger p-2">
+                        <ul>
+                            <?php foreach ($validation_errors as $error) : ?>
+                                <li>
+                                    <?= $error ?>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
+                <?php endif; ?>
+
+                <?php if (isset($server_error)) : ?>
+                    <div class="alert alert-danger p-2 text-center">
+                        <?= $server_error ?>
+                    </div>
+                <?php endif; ?>
                 </div>
             </div>
         </div>
+    </div>
 
-    <?php endif; ?>
 
     <!-- inicio do footer ----------------------------- -->
 
@@ -398,7 +441,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 <script>
     flatpickr("#mudar_data", {
         inline: true,
-    dateFormat: "d/m/Y",
+        dateFormat: "d/m/Y",
     });
 </script>
 

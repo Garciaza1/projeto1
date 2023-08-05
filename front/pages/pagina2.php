@@ -24,6 +24,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     $logado = $_SESSION['email'];
     $user = $_SESSION['user_name'];
     $user_id = $_SESSION['user_id'];
+    $cadastrado['id'] = $user_id;
     /*
     $partesDoNome = explode(" ", $user);
     $primeiro_nome = $partesDoNome[0];
@@ -55,13 +56,15 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
- <!-- fontawesome -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <!-- links dos arquivos assets -->
     <link rel="stylesheet" href="../assets/arquivo.css">
     <script defer src="../assets/arquivo.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+
 
     <!-- posteriormente colocar icones na guia do site-->
     <title>pagina 2</title>
@@ -116,17 +119,63 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             <h2>Seção de Comentários</h2>
         </div>
 
+        <!--
+        <div class="container d-grid justify-content-center  mt-5">
+            <form class="form-inline ">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Pesquisar...">
+                    <div class="input-group-append">
+                        <button class="btn btn-dark border border-1" type="submit"><i class="fa-solid fa-magnifying-glass"> </i> Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        -->
+
         <?php if (mysqli_num_rows($result['select_todos_comentarios']) > 0) : // tem que funcionar sem o login. 
         ?>
             <section class="comentario mt-5 d-grid justify-content-center" style="margin-left: 0%;">
-                <div class="jumbotron jumbotron-fluid bg-secondary text-white border border- rounded row">
+                <div class="jumbotron jumbotron-fluid bg-sucsess text-white border border-2 m-2 p-2">
                     <div class="container align-items-start col-12">
-                        <?php while ($comentarios = mysqli_fetch_assoc($result['select_todos_comentarios'])) : ?>
-                            <?php $autor = $comentarios['nome'];
-                            $comentario = $comentarios['comentario']; ?>
-                            <h5 class="display-9 pt-2"><?= $autor ?></h5>
-                            <p class="lead p-1"><?= $comentario . "<hr>" ?></p>
-                        <?php endwhile; ?>
+                        <table id="tabela-comentarios" class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Comentarios</th>
+                                    <th>Editar</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($comentarios = mysqli_fetch_assoc($result['select_todos_comentarios'])) : ?>
+                                    <?php
+                                    $autor = $comentarios['nome'];
+                                    $comentario = $comentarios['comentario'];
+                                    $id = $comentarios['id'];
+                                    ?>
+                                    <tr class="">
+                                        <td>
+                                            <h5><?= $autor . ":" ?></h5>
+                                            <p><?= $comentario ?></p>
+                                            <form method="post" name="editar_comentario">
+                                            <?php if ($autor == $user) :?>
+                                            <textarea value="<?= $comentario ?>" name="text_comentario_novo" rows="1" cols="85"></textarea>
+                                            <?php endif; ?>
+                                            
+                                        </td>
+                                        <?php if ($autor != $user) : ?>
+                                            <td class="border border-1 border-bottom border-top border-end"> Editar <i class="fa-solid fa-pencil"></i></td>
+                                            <td class="border border-1 border-bottom border-top border-end"> Excluir <i class="fa-solid fa-trash"></i></td>
+                                        <?php endif; ?>
+                                        <!-- so pode editar ou excluir se o id for igual o id do autor ou nome sla   ../../back/controller/editar.php -->
+                                        <?php if ($autor == $user) : ?>
+                                            <td class="border border-1 border-bottom border-top border-end"><input type="submit" name="" value="" hidden href="#">Editar <i class="fa-solid fa-pencil"></i></input></form></td>
+                                            <td class="border border-1 border-bottom border-top border-end"><a href="../../back/controller/excluir.php">Excluir <i class="fa-solid fa-trash"></i></a></td>
+                                        <?php endif; ?>
+
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
@@ -207,6 +256,42 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <footer class="footer p-3 text-center">
         &copy; Todos os direitos reservados. | &reg;since 2023
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#tabela-comentarios').DataTable({
+                pageLength: 10,
+                pagingType: "full_numbers",
+                language: {
+                    decimal: "",
+                    emptyTable: "Sem dados disponíveis na tabela.",
+                    info: "Mostrando _START_ até _END_ de _TOTAL_ registos",
+                    infoEmpty: "Mostrando 0 até 0 de 0 registos",
+                    infoFiltered: "(Filtrando _MAX_ total de registos)",
+                    infoPostFix: "",
+                    thousands: ",",
+                    lengthMenu: "Mostrando _MENU_ registos por página.",
+                    loadingRecords: "Carregando...",
+                    processing: "Processando...",
+                    search: "Filtrar:",
+                    zeroRecords: "Nenhum registro encontrado.",
+                    paginate: {
+                        first: "Primeira",
+                        last: "Última",
+                        next: "Seguinte",
+                        previous: "Anterior"
+                    },
+                    aria: {
+                        sortAscending: ": ative para classificar a coluna em ordem crescente.",
+                        sortDescending: ": ative para classificar a coluna em ordem decrescente."
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 

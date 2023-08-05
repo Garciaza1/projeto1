@@ -14,6 +14,9 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
 } else {
     
     $logado = $_SESSION['email'];
+    $user = $_SESSION['user_name'];
+    $user_id = $_SESSION['user_id'];
+    $cadastrado['id'] = $user_id;
     print_r( $logado . ' :)');
 }
 ?>

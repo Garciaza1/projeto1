@@ -55,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_SESSION['email']) == true && isset($_SESSION['senha']) == true) {
                 
                 header('Location: ../../front/index.php');
+                global $logado;
+                return $_SESSION['user_id'];
 
             } else {
                 
