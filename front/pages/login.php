@@ -104,6 +104,45 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
             </div>
         </div>
     </div>
+
+    
+    <div class="modal" id="modalErro">
+        <div class="modal-dialog draggable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ALERTA:</h5>
+                    <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger p-2 text-center">
+                        ESTE SITE TEM FINS APENAS DE ENTRETENIMENTO!!!!
+                        <br>
+                        NÃO TEM SEGURANÇA COLOQUE APENAS DADOS FALSOS PARA SUA PROTEÇÃO!!!!
+                        <br>
+                        você foi avisado
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--   JQuery   -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+    // Exibir o modal de erro automaticamente
+    document.getElementById("modalErro").style.display = "flex";
+    document.getElementById("fechar").addEventListener('click', () => {
+        document.getElementById("modalErro").classList.toggle("d-none");
+    })
+
+    // Inicializa a função draggable do jQuery UI para tornar o modal movível
+    $(function() {
+        $(".draggable").draggable();
+    });
+</script>
+
 </body>
 
 </html>

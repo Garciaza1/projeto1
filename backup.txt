@@ -59,3 +59,52 @@ if (mysqli_num_rows($result['select_comentario_pessoal']) > 0) {
 }
 
         
+
+                <!-- pagina2
+        <div class="container d-grid justify-content-center  mt-5">
+            <form class="form-inline ">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Pesquisar...">
+                    <div class="input-group-append">
+                        <button class="btn btn-dark border border-1" type="submit"><i class="fa-solid fa-magnifying-glass"> </i> Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        -->
+
+
+
+                $result['select_todos_comentarios'];
+                $resultado = mysqli_fetch_all($result['select_todos_comentarios'], MYSQLI_ASSOC);
+
+                <?php
+        foreach ($resultado as $id_valido) {
+
+            if ($id_valido == $id) {
+                $result = mysqli_query(
+                    $conexao,
+                    "SELECT * FROM comentarios WHERE id = '$id_valido'"
+                );
+                $resultado = mysqli_fetch_assoc($result);
+                $comentario_valido = $resultado['comentario'];
+            }
+        }
+        ?>
+<?= $comentario_valido?>
+    <script>
+        /* 
+        FAZER O EDITAR ABrir ESSA CAIXA NO INNER HTML
+
+       <button id="editarComentario" class="btn btn-dark border border-rounded">Editar<i class="fa-solid fa-pencil"></i></button>
+        
+       */
+
+        document.getElementById('editarComentario').addEventListener('click', () => {
+            document.getElementById('comentario').innerHTML = `
+            <form method="post" action="../../back/controller/editar.php?id=<?= $id ?>">
+            <textarea type="text" value="<?php ?>" name="text_comentario_novo"></textarea>
+            <button type="submit" class="btn btn-dark border border-rounded">Editar</button>
+            </form>`;
+        });
+    </script>

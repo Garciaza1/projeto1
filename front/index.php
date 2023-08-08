@@ -16,9 +16,11 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     }
 
     //header('Location: pages/login.php');
-    echo "faça login";
+    $deslogado = true;
 } else {
 
+    $deslogado = false;
+    
     $logado = $_SESSION['email'];
     $user = $_SESSION['user_name'];
     $user_id = $_SESSION['user_id'];
@@ -109,7 +111,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
     <!-- INICIO DO MAIN --------------------------------------------------------------------------------------------------------------------------------- -->
     <main class="">
-        <aside class="d-grid">
+        <div class="d-grid">
             <div class="row">
                 <nav class="menu1 border border-dark-subtle p-3">
                     <div class="justify-content-start col-12">
@@ -122,21 +124,16 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                         <button class="border spinner-border " id="btn2">
                             <img width="30px" src="https://www.otempo.com.br/image/contentid/policy:1.2873697:1685219245/MC-Pipokinha-jpg.jpg?f=3x2&w=1224" alt="">
                         </button>
-                        <label>3 </label>
-                        <button class="border spinner-border me-5" id="btn3">
-                            <img width="30px" src="https://i1.sndcdn.com/artworks-000465638568-6mvcd2-t500x500.jpg" alt="">
-                        </button>
 
-                        ☝🤓Sugiro que coloque dados falsos e que na hora de trocar nesta pagina tenha certeza
+                        ☝🤓Sugiro que coloque dados falsos e que na hora de logar nesta pagina tenha certeza
 
                     </div>
-
                 </nav>
             </div>
-        </aside>
+        </div>
 
-        <!-- colocar os sections em d-none para p/ JS tirar o d-none -->
         <!-- colocar a descrição do site-->
+        <!--PRIMEIRA SESSAO --------------------------------------------------------------------------------------------------------------------------------- -->
         <section class="container-fluid text-center d-none" id="Alan-Turing">
             <h2 class="">
                 Alan Turing: Ateu, Pai da Ciência da Computação e <br> <ins>🥵HOMOSSEXUAL😈</ins>
@@ -182,6 +179,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
             </div>
         </section>
+
         <!--SEGUNDA SESSAO --------------------------------------------------------------------------------------------------------------------------------- -->
         <section class="container-fluid text-center mt-4 d-none" id="Ada-Lovelace">
             <h2 class="">
@@ -222,15 +220,55 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
             </div>
         </section>
-        <!-- TERCEIRA SESSAO --------------------------------------------------------------------------------------------------------------------------------- -->
-        <section>
 
-        </section>
     </main>
 
+
     <footer class="footer p-3 text-center">
-        &copy; Todos os direitos reservados. | &reg;since 2023
+        &copy; Todos os direitos reservados. | &reg;since 2023&trade;
     </footer>
+
+    <!-- modal de logins -->
+    <?php if ($deslogado == true) : ?>
+        <div class="modal" id="modalErro">
+            <div class="modal-dialog draggable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">ALERTA:</h5>
+                        <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger p-2 text-center">
+                            FAÇA UM LOGIN CARA NÃO SEJA BURROR🤠🥳
+                            <br>
+                            ESTE SITE TEM FINS APENAS DE ENTRETENIMENTO!!!!
+                            <br>
+                            você foi avisado😡
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!--   JQuery   -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        // Exibir o modal de erro automaticamente
+        document.getElementById("modalErro").style.display = "flex";
+        document.getElementById("fechar").addEventListener('click', () => {
+            document.getElementById("modalErro").classList.toggle("d-none");
+        })
+
+        // Inicializa a função draggable do jQuery UI para tornar o modal movível
+        $(function() {
+            $(".draggable").draggable();
+        });
+    </script>
+
 </body>
+
 
 </html>

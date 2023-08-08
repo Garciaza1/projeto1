@@ -1,22 +1,21 @@
 <?php
-include_once("../../back/config.php");
 
-$result['select_todos_comentarios'] = mysqli_query(
-    $conexao,
-    "SELECT u.nome, c.comentario, c.id, c.id_comentario " .
-        "FROM comentarios c INNER JOIN " .
-        "usuario u ON c.id_comentario = u.id " .
-        "ORDER BY c.id;"
-);
+if(!empty($_GET['id'])){
+    
+    include_once("../config.php");
+    $id = $_GET['id'];
 
-while ($comentarios = mysqli_fetch_assoc($result['select_todos_comentarios'])) {
+    $result = mysqli_query(
+        $conexao, "SELECT * FROM comentarios WHERE id = '$id'"
+    );
 
-    $autor = $comentarios['nome'];
-    $comentario = $comentarios['comentario'];
-    $id = $comentarios['id'];
+    if($result->num_rows > 0 ){
+
+        $result = mysqli_query(
+            $conexao, "DELETE FROM comentarios WHERE id = '$id'"
+        );
+
+        header('Location:../../front/pages/pagina2.php');
+    }
+    
 }
-
-$result['delete_comentario'] = mysqli_query(
-    $conexao, "DELETE FROM comentarios WHERE id = '$id'"
-);
-header('Location:../../front/pages/pagina2.php');

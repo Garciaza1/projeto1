@@ -2,7 +2,6 @@
 
 include_once("../../back/config.php");
 include_once("../../back/model/update.php");
-// include_once('../../back/model/loginT.php');
 
 if (!isset($_SESSION)) {
     session_start();
@@ -34,7 +33,6 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     // caracteristicas do usuario:
     $logado = $_SESSION['email'];
     $user = $_SESSION['user_name'];
-
     $user_id = $_SESSION['user_id'];
 
 
@@ -65,7 +63,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 $email = $user_data['email'];
                 // validação senha
                 $senha = $user_data['senha'];
-                $senha_ocultada = ocultarParte($senha,'***',6);
+                $senha_ocultada = ocultarParte($senha, '***', 6);
 
                 $data_nasc = $user_data['dataNasc'];
                 $telefone = $user_data['telefone'];
@@ -79,7 +77,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             }
         } else {
             header('Location:perfil.php');
-            echo "deu ruim menos de 1";
+            echo "deu ruim menos de 1";// trocar pela validação
         }
     }
 }
@@ -101,8 +99,8 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <!--   JQuery   -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
     <!--  Flatpickr -->
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
@@ -142,22 +140,22 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             </div>
             <a class="btn btn-info d-block mb-3" href="../index.php">Home</a>
 
-            
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img height="30px" src="../assets/imagens/peril-2.png" alt="perfil">
-                        <i class=""></i><?= $user ?>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. -->
-                        <?php foreach ($perfil as $dados) : ?>
-                            <?php print_r("<li class=\"dropdown-item\"> " .  $dados . "</li> <hr class=\"dropdown-divider\">")  ?>
-                        <?php endforeach; ?>
-                        <li> <a class="dropdown-item" href="../../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
-                    </ul>
-                </div>
-            <?php endif; ?>
-        
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img height="30px" src="../assets/imagens/peril-2.png" alt="perfil">
+                    <i class=""></i><?= $user ?>
+                </button>
+                <ul class="dropdown-menu">
+                    <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. -->
+                    <?php foreach ($perfil as $dados) : ?>
+                        <?php print_r("<li class=\"dropdown-item\"> " .  $dados . "</li> <hr class=\"dropdown-divider\">")  ?>
+                    <?php endforeach; ?>
+                    <li> <a class="dropdown-item" href="../../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
+                </ul>
+            </div>
+        <?php endif; ?>
+
 
     </header>
 
@@ -168,8 +166,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             <!-- Barra de navegação na parte esquerda -->
             <nav class="col-3 border rounded-2 border-1 d-flex justify-content-center">
                 <div class="menu-header justfy-content-between text-center">
-
-                    <div>
+                    <div><!--trocar por uma table -->
                         <p class="p-1">
                         <h4>dados atuais do cliente:</h4>
                         <br>Nome:<strong><?= ' ' .  $nome ?></strong>
@@ -181,23 +178,14 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                         <br>Sexo:<strong><?= ' ' .  $sexo ?></strong>
                         <br>
                         <a class="btn border border-2 btn-dark mt-4 mb-2" href="../../back/model/DELETE.php"> <i data-fa-symbol="delete" class="fa-solid fa-trash fa-fw me-2"></i>DELETAR PERFIL</a>
+                        <br>depois de apertar não tem volta!
                         </p>
                         <hr>
                         <p class="pt-3">
-                            colocar o aviso:<br>PRECISA VALIDAR O RESTO E AJUSTAR A VALIDAÇÃO DE ERROS DO SESSION<br>
-                            Muito cuidado ao colocar seus dados pois este site não é seguro ainda
-                            <br>
                             é apenas uma pagina de testes ✌
                             ☝🤓<br> Sugiro que coloque dados falsos e que na hora de trocar nesta pagina tenha certeza
                             de que vai lembrar da troca da informação no caso dela precisar ser validada no login.
-
                         </p>
-                        <!-- 
-
-                            <a class="btn btn-info d-block mb-3" href="cadastro.php">Cadastrar</a>
-                            <a class="btn btn-info d-block mb-3" href="login.php">Login</a>
-                        -->
-
                     </div>
                 </div>
             </nav>
@@ -207,7 +195,6 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                 <div class="container   text-center pe-5 me-5">
 
                     <h2 class="pb-2 fa-user-circle-o">Dados pessoais:</h2>
-                    <!-- COLOCAR TODOS OS FORMS ESCONDIDOS E DPS DESCER DPS DE APRTAR O BOTAO E COLOCAR NO FORM-->
 
                     <!-- alterar nome -->
                     <section class="border border-secundary-subtle rounded-3 p-3 my-2 col-12">
@@ -356,53 +343,49 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
             </main>
         </div>
     </div>
-    <!-- parte onde a pessoa excluiria a conta ou o cadastro dela -->
 
 
-<!-- validação de erros ------------------------------------------->
+    <!-- validação de erros (fazer funcionar dps) ------------------------------------------->
 
-<?php if (!isset($logado)) : ?>
-    <?php $_SESSION['validation_errors'] = "precisa estar logado antes bobão "; ?>
-<?php endif; ?>
+    <?php if (!isset($logado)) : ?>
+        <?php $_SESSION['validation_errors'] = "precisa estar logado antes bobão "; ?>
+    <?php endif; ?>
 
-<?php if (!empty($validation_errors)) : ?>
-    <div class="modal" id="modalErro">
-        <div class="modal-dialog draggable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Erro</h5>
-                    <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-danger p-2">
-                        <ul>
-                            <?php foreach ($validation_errors as $error) : ?>
-                                <li>
-                                    <?= $error ?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+    <?php if (!empty($validation_errors)) : ?>
+        <div class="modal" id="modalErro">
+            <div class="modal-dialog draggable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Erro</h5>
+                        <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
                     </div>
-                <?php endif; ?>
+                    <div class="modal-body">
+                        <div class="alert alert-danger p-2">
+                            <ul>
+                                <?php foreach ($validation_errors as $error) : ?>
+                                    <li>
+                                        <?= $error ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
 
-                <?php if (isset($server_error)) : ?>
-                    <div class="alert alert-danger p-2 text-center">
-                        <?= $server_error ?>
+                    <?php if (isset($server_error)) : ?>
+                        <div class="alert alert-danger p-2 text-center">
+                            <?= $server_error ?>
+                        </div>
+                    <?php endif; ?>
                     </div>
-                <?php endif; ?>
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <!-- inicio do footer ----------------------------- -->
-
-    <hr>
-
-    <footer class="footer p-3 text-center">
-        &copy; Todos os direitos reservados. | &reg;since 2023
-    </footer>
+        <hr>
+        <!-- inicio do footer ----------------------------- -->
+        <footer class="footer p-3 text-center">
+            &copy; Todos os direitos reservados. | &reg;since 2023&trade;
+        </footer>
 </body>
 
 <!-- abre e fecha os forms-->

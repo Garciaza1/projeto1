@@ -50,8 +50,8 @@ include_once("../../back/config.php");
                             <form action="../../back/model/cadastroT.php" method="post">
 
                                 <div class="mb-3">
-                                    <label for="text_name" class="form-label">Nome</label>
-                                    <input type="text" name="text_name" id="text_name" value="" class="form-control" required>
+                                    <label for="text_name" class="form-label">Nome ou Apelido</label>
+                                    <input type="text" name="text_name" id="text_name" value="" class="form-control" required placeholder="João Da Silva ou joãozinho123">
                                 </div>
 
                                 <div class="row mb-3">
@@ -75,14 +75,14 @@ include_once("../../back/config.php");
                                 <div class="row mb-3">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="text_email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="text_email" id="text_email" required>
+                                        <input type="email" class="form-control" name="text_email" id="text_email" required placeholder="Joaozinho@gmail.com">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="text_senha" class="form-label">Senha</label>
-                                        <input type="Senha" class="form-control" name="text_senha" id="text_senha" required>
+                                        <input type="Senha" class="form-control" name="text_senha" id="text_senha" required placeholder="12345678910">
                                     </div>
                                     <div class="col-md-6 col-sm-12 mt-3">
-                                        <label for="text_phone" class="form-label">Telefone</label><br>
+                                        <label for="text_phone" class="form-label">Telefone (apenas numeros)</label><br>
                                         <input type="text" class="form-control" name="text_phone" id="text_phone" required>
                                     </div>
                                 </div>
@@ -117,6 +117,46 @@ include_once("../../back/config.php");
             </div>
         </div>
     </div>
+
+
+    <div class="modal" id="modalErro">
+        <div class="modal-dialog draggable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ALERTA:</h5>
+                    <button type="button" class="btn-close btn-close-white" aria-label="Close" id="fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger p-2 text-center">
+                        ESTE SITE TEM FINS APENAS DE ENTRETENIMENTO!!!!
+                        <br>
+                        NÃO TEM SEGURANÇA COLOQUE APENAS DADOS FALSOS PARA SUA PROTEÇÃO!!!!
+                        <br>
+                        você foi avisado
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--   JQuery   -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+    // Exibir o modal de erro automaticamente
+    document.getElementById("modalErro").style.display = "flex";
+    document.getElementById("fechar").addEventListener('click', () => {
+        document.getElementById("modalErro").classList.toggle("d-none");
+    })
+
+    // Inicializa a função draggable do jQuery UI para tornar o modal movível
+    $(function() {
+        $(".draggable").draggable();
+    });
+    
+</script>
+
 
     <script>
         flatpickr("#text_birthdate", {
