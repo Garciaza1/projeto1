@@ -12,7 +12,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
         unset($_SESSION['senha']);
         unset($_SESSION['user_name']);
         unset($_SESSION['user_id']);
-        header('Location: ../../front/pages/login.php');
+        header('Location: ../../pages/login.php');
 
     }
 }
@@ -26,7 +26,7 @@ if (!empty($user_id)) {
     $user_id;
 
     $sqlDelete = "DELETE FROM usuario WHERE id = '$user_id'";
-    include_once('../../back/config.php');
+    include_once('../config.php');
 
     $result = $conexao->query($sqlDelete);
 
@@ -38,7 +38,7 @@ if (!empty($user_id)) {
         unset($_SESSION['user_id']);
 
     }
-    header('Location:../front/pages/cadastro.php');
+    header('Location:../../pages/cadastro.php');
 
 }
 

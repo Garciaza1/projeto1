@@ -9,4 +9,4 @@ unset($_SESSION['senha']);
 unset($_SESSION['user_name']);
 unset($_SESSION['user_id']);
 
-header('Location: ../front/pages/login.php');
+header('Location: ../../pages/login.php');

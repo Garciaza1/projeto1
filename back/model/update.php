@@ -160,5 +160,5 @@ if (isset($_POST['update_genero'])) {
     $sqlUpdate = "UPDATE usuario SET sexo = '$sexo' , atualizadoEm = NOW() WHERE id = '$user_id'";
     $result = $conexao->query($sqlUpdate);
     $_SESSION['validation_errors'] = "Sucesso na mudança!";
-    header('Location:../pages/perfil.php');
+    header('Location:../../pages/perfil.php');
 }
