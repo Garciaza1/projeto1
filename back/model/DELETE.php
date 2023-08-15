@@ -38,7 +38,7 @@ if (!empty($user_id)) {
         unset($_SESSION['user_id']);
 
     }
-    header('Location: ../../front/pages/cadastro.php');
+    header('Location:../front/pages/cadastro.php');
 
 }
 

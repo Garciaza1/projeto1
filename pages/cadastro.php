@@ -1,6 +1,6 @@
 <?php
 
-include_once("../../back/config.php");
+include_once("../back/config.php");
 
 ?>
 
@@ -47,7 +47,7 @@ include_once("../../back/config.php");
 
                             <hr>
 
-                            <form action="../../back/model/cadastroT.php" method="post">
+                            <form action="../back/model/cadastroT.php" method="post">
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Nome ou Apelido</label>

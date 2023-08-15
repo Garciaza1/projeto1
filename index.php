@@ -1,7 +1,7 @@
 <?php
 
-include_once("../back/config.php");
-include_once("../back/model/loginT.php");
+include_once("back/config.php");
+include_once("back/model/loginT.php");
 
 
 if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)) {

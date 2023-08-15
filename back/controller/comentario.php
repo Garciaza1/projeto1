@@ -49,7 +49,7 @@ if (isset($_SESSION['email']) == true) {
 
 
     if ($result['select_todos_comentarios'] == null) {
-        header('Location: ../../front/pages/pagina2.php');
+        header('Location: ../../pages/pagina2.php');
         $_SESSION['validation_errors'] = "Não há comentarios ainda.";
     }
 
@@ -64,7 +64,7 @@ if (isset($_SESSION['email']) == true) {
     );
 
     if ($result['select_todos_comentarios'] == null) {
-        header('Location: ../../front/pages/pagina2.php');
+        header('Location: ../../pages/pagina2.php');
         $_SESSION['validation_errors'] = "Não há comentarios ainda.";
     }
 
@@ -91,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             "INSERT INTO comentarios(id_comentario,comentario,data_comentario) VALUES "
                 . "('$id','$comentario', NOW())"
         );
-        header('Location:../../front/pages/pagina2.php');
+        header('Location:../../pages/pagina2.php');
     } else {
 
-        header('Location:../../front/pages/pagina2.php');
+        header('Location:../../pages/pagina2.php');
         $_SESSION['validation_errors'] = "faça um login para comentar";
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-include_once("../../back/config.php");
-include_once("../../back/model/loginT.php");
+include_once("../back/config.php");
+include_once("../back/model/loginT.php");
 
 if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
 {
@@ -55,7 +55,7 @@ if((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true))
 
                             <h4><strong>login</strong></h4>
                             <hr>
-                            <form action="../../back/model/loginT.php" method="post">
+                            <form action="../back/model/loginT.php" method="post">
 
                                 <div class="mb-3">
                                     <label for="text_name" class="form-label">Email:</label>

@@ -1,8 +1,8 @@
 <?php
 
-include_once("../../back/config.php");
+include_once("../back/config.php");
 
-include_once("../../back/controller/comentario.php");
+include_once("../back/controller/comentario.php");
 
 if (!isset($_SESSION)) {
     session_start();
@@ -111,7 +111,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                     <?php foreach ($perfil as $dados) : ?>
                         <?php print_r("<li class=\"dropdown-item\"> <a class=\"text-white-50\" href=\"perfil.php\">" .  $dados . "</li></a> <hr class=\"dropdown-divider\">")  ?>
                     <?php endforeach; ?>
-                    <li> <a class="dropdown-item" href="../../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
+                    <li> <a class="dropdown-item" href="../back/model/sair.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Sair</a></li>
                 </ul>
             </div>
         <?php endif; ?>
@@ -160,7 +160,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                         <?php endif; ?>
                                         <!-- so pode editar ou excluir se o id for igual o id do autor ou nome sla   ../../back/controller/editar.php -->
                                         <?php if ($autor == $user) : ?>
-                                            <td class="border border-1 border-bottom border-top border-end"><a href="../../back/controller/excluir.php?id=<?= $id ?>">Excluir <i class="fa-solid fa-trash"></i></a></td>
+                                            <td class="border border-1 border-bottom border-top border-end"><a href="../back/controller/excluir.php?id=<?= $id ?>">Excluir <i class="fa-solid fa-trash"></i></a></td>
                                         <?php endif; ?>
 
                                     </tr>
@@ -180,7 +180,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                         <div class="card mt-3">
                             <div class="card-body">
                                 <h5 class="card-title">Comente o que achou aqui!!</h5>
-                                <form method="post" action="../../back/controller/comentario.php" class="form d-block">
+                                <form method="post" action="../back/controller/comentario.php" class="form d-block">
                                     <div class="form-group">
                                         <textarea class="form-control" name="text_comentario" id="comentario" rows="2" cols="70"></textarea>
                                     </div>

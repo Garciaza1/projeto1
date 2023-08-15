@@ -35,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "INSERT INTO usuario(nome,senha,sexo,telefone,email,dataNasc,criadoEm) VALUES "
         . "('$nome', '$senha', '$sexo', '$telefone_formatado', '$email', '$data_nasc', NOW())"
     );
-    header('Location:../../front/pages/login.php');
+    header('Location:../front/pages/login.php');
 
     
 
 }else {
     $_SESSION['server_error'] = "não foi possível realizar o cadastro";
-    header('Location:../../front/pages/cadastro.php');
+    header('Location:../front/pages/cadastro.php');
 }

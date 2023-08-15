@@ -15,7 +15,7 @@ if(!empty($_GET['id'])){
             $conexao, "DELETE FROM comentarios WHERE id = '$id'"
         );
 
-        header('Location:../../front/pages/pagina2.php');
+        header('Location:../../pages/pagina2.php');
     }
     
 }

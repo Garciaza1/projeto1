@@ -26,7 +26,7 @@ if (isset($_POST['update_name'])) {
     
     if (empty($_POST['text_mudar_nome'])) {
         $validation_errors [] = "o nome precisa ser preenchido";
-        header('Location:../../front/pages/perfil.php');
+        header('Location:../../pages/perfil.php');
 
     }else{
         
@@ -37,7 +37,7 @@ if (isset($_POST['update_name'])) {
         $sqlUpdate = "UPDATE usuario SET nome = '$nome' , atualizadoEm = NOW() WHERE id = '$user_id'";
         $result = $conexao->query($sqlUpdate);
         $_SESSION['validation_errors'] = "Sucesso na mudança!";
-        header('Location:../../front/pages/perfil.php');
+        header('Location:../../pages/perfil.php');
     }
     }
 // email
@@ -53,14 +53,14 @@ if (isset($_POST['update_email'])) {
     if (empty($_POST['text_email_novo']) || empty($_POST['text_email_antigo'])) {
 
         $_SESSION['validation_errors'] = "Por favor preencha os campos email-novo e email-antigo";
-        header('Location:../../front/pages/perfil.php');
+        header('Location:../../pages/perfil.php');
     } else {
 
         //validar os emails
         if ($email_novo == $email_antigo) {
 
             $_SESSION['validation_errors'] = "Os Emails são iguais!";
-            header('Location:../../front/pages/perfil.php');
+            header('Location:../../pages/perfil.php');
         }
 
         $sqlSelect = "SELECT email FROM usuario WHERE email = '$email_antigo' and id = '$user_id'";
@@ -70,10 +70,10 @@ if (isset($_POST['update_email'])) {
             $sqlUpdate = "UPDATE usuario SET email = '$email_novo' , atualizadoEm = NOW() WHERE id = '$user_id'";
             $result = $conexao->query($sqlUpdate);
             $_SESSION['validation_errors'] = "Sucesso na mudança!";
-            header('Location:../../front/pages/perfil.php');
+            header('Location:../../pages/perfil.php');
         } else {
             $_SESSION['validation_errors'] = "o email antigo não existe!";
-            header('Location:../../front/pages/perfil.php');
+            header('Location:../../pages/perfil.php');
         }
     }
 }
@@ -95,7 +95,7 @@ if (isset($_POST['update_senha'])) {
         if ($senha_nova == $senha_antiga) {
 
             $_SESSION['validation_errors'] = "As senhas são iguais!";
-            header('Location:../../front/pages/perfil.php');
+            header('Location:../../pages/perfil.php');
         }
 
         $sqlSelect = "SELECT senha FROM usuario WHERE senha = '$senha_atual' and id = '$user_id'";
@@ -105,10 +105,10 @@ if (isset($_POST['update_senha'])) {
             $sqlUpdate = "UPDATE usuario SET senha = '$senha_nova' , atualizadoEm = NOW() WHERE id = '$user_id'";
             $result = $conexao->query($sqlUpdate);
             $_SESSION['validation_errors'] = "Sucesso na mudança!";
-            header('Location:../../front/pages/perfil.php');
+            header('Location:../../pages/perfil.php');
         } else {
             $_SESSION['validation_errors'] = "A senha antiga não existe!";
-            header('Location:../../front/pages/perfil.php');
+            header('Location:../../pages/perfil.php');
         }
     }
 }
@@ -123,7 +123,7 @@ if (isset($_POST['update_data'])) {
     $sqlUpdate = "UPDATE usuario SET dataNasc = '$data_nasc' , atualizadoEm = NOW() WHERE id = '$user_id'";
     $result = $conexao->query($sqlUpdate);
     $_SESSION['validation_errors'] = "Sucesso na mudança!";
-    header('Location:../../front/pages/perfil.php');
+    header('Location:../../pages/perfil.php');
 }
 // telefone
 if (isset($_POST['update_telefone'])) {
@@ -144,7 +144,7 @@ if (isset($_POST['update_telefone'])) {
     $sqlUpdate = "UPDATE usuario SET telefone = '$telefone_formatado' , atualizadoEm = NOW() WHERE id = '$user_id'";
     $result = $conexao->query($sqlUpdate);
     $_SESSION['validation_errors'] = "Sucesso na mudança!";
-    header('Location:../../front/pages/perfil.php');
+    header('Location:../../pages/perfil.php');
 }
 // sexo
 if (isset($_POST['update_genero'])) {
@@ -160,5 +160,5 @@ if (isset($_POST['update_genero'])) {
     $sqlUpdate = "UPDATE usuario SET sexo = '$sexo' , atualizadoEm = NOW() WHERE id = '$user_id'";
     $result = $conexao->query($sqlUpdate);
     $_SESSION['validation_errors'] = "Sucesso na mudança!";
-    header('Location:../../front/pages/perfil.php');
+    header('Location:../pages/perfil.php');
 }

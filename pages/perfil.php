@@ -1,7 +1,7 @@
 <?php
 
-include_once("../../back/config.php");
-include_once("../../back/model/update.php");
+include_once("../back/config.php");
+include_once("../back/model/update.php");
 
 if (!isset($_SESSION)) {
     session_start();
@@ -51,7 +51,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
         $user_id;
 
         $sqlSelect = "SELECT * FROM usuario WHERE id = '$user_id'";
-        include_once('../../back/config.php');
+        include_once('../back/config.php');
 
         $result = $conexao->query($sqlSelect);
 
@@ -205,7 +205,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
+                        <form method="post" action="../back/model/update.php" class="form d-block d-none">
                             <div class="form-group">
                                 <input type="text" class="form-control mb-2 mt-1" name="text_mudar_nome" id="mudar_nome"></input>
                             </div>
@@ -225,7 +225,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                 ↧
                             </button>
                         </h5>
-                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
+                        <form method="post" action="../back/model/update.php" class="form d-block d-none">
                             <div class="form-group">
 
                                 <label for="email_antigo">Email antigo: </label>
@@ -249,7 +249,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                                 ↧
                             </button>
                         </h5>
-                        <form method="post" action="" class="form d-block d-none">
+                        <form method="post" action="../back/model/update.php" class="form d-block d-none">
                             <div class="form-group">
 
                                 <label for="senha_antiga">Senha antiga: </label>
@@ -274,7 +274,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
+                        <form method="post" action="../back/model/update.php" class="form d-block d-none">
                             <div class="form-group">
                                 <input type="date" class="form-control" name="mudar_data" id="mudar_data" placeholder="escolha uma data"></input>
                             </div>
@@ -293,7 +293,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="../../back/model/update.php" class="form d-block d-none">
+                        <form method="post" action="../back/model/update.php" class="form d-block d-none">
 
                             <div class="form-group">
                                 <input type="tel" class="form-control" name="text_mudar_telefone" id="mudar_tel"></input>
@@ -316,7 +316,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
                             </button>
                         </h5>
 
-                        <form method="post" action="../../back/model/update.php" class="form d-flex d-none">
+                        <form method="post" action="../back/model/update.php" class="form d-flex d-none">
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
 

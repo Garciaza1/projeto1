@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             unset($_SESSION['email']);
             unset($_SESSION['senha']);
 
-            header('location: ../../front/pages/login.php');
+            header('location: ../front/pages/login.php');
         } else {
             // Inicia a sessão e redireciona para a página 2
             $_SESSION['email'] = $email;
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (isset($_SESSION['email']) == true && isset($_SESSION['senha']) == true) {
                 
-                header('Location: ../../front/index.php');
+                header('Location: ../front/index.php');
                 global $logado;
                 return $_SESSION['user_id'];
 
@@ -70,12 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (isset($_POST['submit']) && empty($_POST['text_email'])) {
 
-            header('Location: ../../front/pages/login.php');
+            header('Location: ../front/pages/login.php');
             $_SESSION['validation_errors'] = "O campo email é obrigatório <br> Já tem cadastro?";
 
         } elseif (isset($_POST['submit']) && empty($_POST['text_senha'])) {
 
-            header('Location: ../../front/pages/login.php');
+            header('Location: ../front/pages/login.php');
             $_SESSION['validation_errors'] = "O campo senha é obrigatório <br> Já tem cadastro?";
 
         }
