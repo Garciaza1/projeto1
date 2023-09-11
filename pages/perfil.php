@@ -143,8 +143,7 @@ if ((!isset($_SESSION['email']) == true) && (!isset($_SESSION['senha']) == true)
 
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img height="30px" src="../assets/imagens/peril-2.png" alt="perfil">
-                    <i class=""></i><?= $user ?>
+                <i class="fa-solid fa-circle-user"></i><?= $user ?>
                 </button>
                 <ul class="dropdown-menu">
                     <!-- trocar o foreach e usar um metodo normal e colocar os lin e não lin e mehlorar a estilização. -->
